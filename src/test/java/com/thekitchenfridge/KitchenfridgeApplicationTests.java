@@ -1,4 +1,4 @@
-package com.thekitchenfridge.kitchenfridge;
+package com.thekitchenfridge;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
