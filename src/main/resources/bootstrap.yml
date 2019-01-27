@@ -1,6 +1,0 @@
-security:
-  jwt:
-    token:
-      secret-key: secret
-      expiration-length: 3600000
-      token-prefix: Bearer

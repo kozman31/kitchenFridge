@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+public class User implements UserDetails, UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

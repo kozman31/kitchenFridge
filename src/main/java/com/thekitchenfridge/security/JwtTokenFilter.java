@@ -27,11 +27,12 @@ import static com.thekitchenfridge.security.JwtSecureFields.TOKEN_PREFIX;
 
 public class JwtTokenFilter extends BasicAuthenticationFilter {
 
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+
     public JwtTokenFilter(AuthenticationManager authManager){
         super(authManager);
     }
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse rsp, FilterChain filterChain) throws ServletException, IOException {

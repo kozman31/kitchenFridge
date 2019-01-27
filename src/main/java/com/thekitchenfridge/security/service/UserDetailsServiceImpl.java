@@ -15,6 +15,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username).orElseThrow(
@@ -22,13 +25,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         );
     }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public User registerNewUser(UserProfile userProfile) throws UserExistsException {
         if (userExists(userProfile.getUsername())) {
             throw new UserExistsException(
-                    "There is an account with that username:" + userProfile.getUsername());
+                    /*"There is an account with that username:" + userProfile.getUsername()*/);
         }
         User user = User.builder()
                 .username(userProfile.getUsername())

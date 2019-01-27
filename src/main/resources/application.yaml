@@ -1,27 +1,15 @@
 spring:
   profiles:
     active: dev
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    ddl-auto: update
-    show_sql: false
-    use_sql_comments: false
-    format_sql: false
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
   datasource:
-    url: jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:mariadb://192.168.0.123:3306/kitchen_table_users
+    username: admin
+    password: password
+    driverClassName: org.mariadb.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB53Dialect
+    hibernate:
+      ddl-auto: update
 logging:
   level:
     org.springframework.web: INFO
-security:
-  jwt:
-    token:
-      secret-key: secret
-      expiration-length: 3600000
-      token-prefix: Bearer

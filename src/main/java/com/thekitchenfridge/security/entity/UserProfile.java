@@ -1,15 +1,12 @@
 package com.thekitchenfridge.security.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserProfile {
-    String username;
-    String password;
+public interface UserProfile {
+    String username = null;
+    String password = null;
+    void setUsername(String username);
+    String getUsername();
+    void setPassword(String password);
+    String getPassword();
 }

@@ -32,11 +32,11 @@ import static com.thekitchenfridge.security.JwtSecureFields.*;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Slf4j
-public class BasicAuthFilter extends AbstractAuthenticationProcessingFilter {
+public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authManager;
-    public BasicAuthFilter(String loginUrl, AuthenticationManager authManager){
-        super(loginUrl);
+
+    public BasicAuthFilter(AuthenticationManager authManager){
         this.authManager = authManager;
     }
 
@@ -44,20 +44,19 @@ public class BasicAuthFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
         try{
             UserProfile user = new ObjectMapper().readValue(req.getInputStream(), UserProfile.class);
-            System.out.println(user.getUsername());
             return authManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            user.getUsername(),
-                            user.getPassword(),
-                            new ArrayList<>()
-                    )
+                new UsernamePasswordAuthenticationToken(
+                        user.getUsername(),
+                        user.getPassword(),
+                        new ArrayList<>()
+                )
             );
-//        }catch(AuthenticationException e){
-//            log.error("Authentication error: " + e.getMessage());
-//            throw new AuthenticationExceptionImpl(e.getMessage());
+        }catch(AuthenticationException e){
+            log.error("Authentication error: " + e.getMessage());
+            throw new AuthenticationExceptionImpl();
         }catch(IOException e){
             log.error("IOException Empty Request read error " + e.getMessage());
-            throw new AuthenticationExceptionImpl(e.getMessage());
+            throw new AuthenticationExceptionImpl();
         }
     }
 

@@ -8,30 +8,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 @RestController
 @Slf4j
-@RequestMapping("/auth")
 public class UserController {
 
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    @PostMapping(value="/register", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void signup(@RequestBody UserProfile user){
-        log.debug(user.getUsername());
-        userDetailsService.registerNewUser(user);
+    @PostMapping(value="/auth/register", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpStatus> signup(@RequestBody UserProfile userProfile){
+        userDetailsService.registerNewUser(userProfile);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping(value="/signin", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void userProfile( ){
-
+    public void userProfile(@AuthenticationPrincipal Principal principal){
+        log.info(principal.getName());
     }
 
-    @RequestMapping(value="/{user}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/auth/{user}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity userProfile(@PathVariable String username){
         User user = userDetailsService.loadUserByUsername(username);
         if (user == null){

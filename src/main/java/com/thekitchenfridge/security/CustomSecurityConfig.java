@@ -38,7 +38,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(new JwtTokenFilter(authenticationManagerBean()), UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(new BasicAuthFilter("/auth/signin", authenticationManagerBean()),UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(new BasicAuthFilter( authenticationManagerBean()),UsernamePasswordAuthenticationFilter.class);
 
         http.exceptionHandling()
                 .accessDeniedHandler((request, response, accessDeniedException) -> {
@@ -54,7 +54,6 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
-    @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
