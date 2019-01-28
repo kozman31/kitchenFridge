@@ -2,6 +2,7 @@ package com.thekitchenfridge.security.controller;
 
 import com.thekitchenfridge.security.entity.User;
 import com.thekitchenfridge.security.entity.UserProfile;
+import com.thekitchenfridge.security.entity.UserProfileImpl;
 import com.thekitchenfridge.security.service.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UserController {
     UserDetailsServiceImpl userDetailsService;
 
     @PostMapping(value="/auth/register", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> signup(@RequestBody UserProfile userProfile){
+    public ResponseEntity<HttpStatus> signup(@RequestBody UserProfileImpl userProfile){
         userDetailsService.registerNewUser(userProfile);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -33,7 +34,7 @@ public class UserController {
         log.info(principal.getName());
     }
 
-    @RequestMapping(value="/auth/{user}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/auth/{user}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity userProfile(@PathVariable String username){
         User user = userDetailsService.loadUserByUsername(username);
         if (user == null){

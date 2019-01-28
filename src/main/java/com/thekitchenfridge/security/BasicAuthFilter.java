@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thekitchenfridge.exceptions.AuthenticationExceptionImpl;
 import com.thekitchenfridge.security.entity.User;
 import com.thekitchenfridge.security.entity.UserProfile;
+import com.thekitchenfridge.security.entity.UserProfileImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -43,7 +46,7 @@ public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
         try{
-            UserProfile user = new ObjectMapper().readValue(req.getInputStream(), UserProfile.class);
+            UserProfileImpl user = new ObjectMapper().readValue(req.getInputStream(), UserProfileImpl.class);
             return authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getUsername(),
@@ -51,12 +54,9 @@ public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
                         new ArrayList<>()
                 )
             );
-        }catch(AuthenticationException e){
-            log.error("Authentication error: " + e.getMessage());
-            throw new AuthenticationExceptionImpl();
         }catch(IOException e){
             log.error("IOException Empty Request read error " + e.getMessage());
-            throw new AuthenticationExceptionImpl();
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -76,9 +76,9 @@ public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failedEx) throws IOException, ServletException {
+    protected void unsuccessfulAuthentication(HttpServletRequest req, HttpServletResponse rsp, AuthenticationException authFailed) throws IOException, ServletException {
         SecurityContextHolder.clearContext();
-        log.warn("Authentication Failed: " + failedEx.getMessage());
-        throw failedEx;
+        log.warn("Authentication Failed: " + authFailed.getMessage());
+        rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }

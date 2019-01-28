@@ -23,36 +23,34 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value ={JwtAuthException.class})
     public ResponseEntity<String> invalidJwt(JwtAuthException e){
         log.debug("Invalid JWT "+e.getMessage());
-
-        return handleException(e, "Error: "+e.getMessage(), HttpStatus.UNAUTHORIZED);
+        return handleException(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(value = {UserExistsException.class})
     public ResponseEntity<String> userAlreadyRegistered(UserExistsException e){
         log.debug("UserRegistered "+e.getMessage());
-        return handleException(e, "Error: "+e.getMessage(), HttpStatus.CONFLICT);
+        return handleException(e.getMessage(), HttpStatus.OK);
     }
 
     @ExceptionHandler(value = {AuthenticationExceptionImpl.class})
     public ResponseEntity<String> authenticationFailed(AuthenticationException e){
         log.debug("AuthException "+e.getMessage());
-        return handleException(e, "Error: "+e.getMessage(), HttpStatus.UNAUTHORIZED);
+        return handleException(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(value = {TransactionException.class})
     public ResponseEntity<String> authenticationFailed(TransactionException e){
         log.debug("Transaction Error "+e.getMessage());
-        return handleException(e, "Transaction Error: "+e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return handleException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = {IOException.class})
     public ResponseEntity<String> IOException(IOException e){
         log.debug("IOException " + e.getMessage());
-        return handleException(e, "Error: "+e.getMessage(), HttpStatus.BAD_REQUEST);
+        return handleException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public ResponseEntity<String> handleException(Exception e, String body, HttpStatus httpStatus){
-
+    public ResponseEntity<String> handleException(String body, HttpStatus httpStatus){
         return new ResponseEntity<>(body, httpStatus);
     }
 }

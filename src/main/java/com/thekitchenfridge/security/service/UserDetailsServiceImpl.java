@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public User registerNewUser(UserProfile userProfile) throws UserExistsException {
         if (userExists(userProfile.getUsername())) {
             throw new UserExistsException(
-                    /*"There is an account with that username:" + userProfile.getUsername()*/);
+                    "Error: User account" + userProfile.getUsername()+" already exists.");
         }
         User user = User.builder()
                 .username(userProfile.getUsername())
