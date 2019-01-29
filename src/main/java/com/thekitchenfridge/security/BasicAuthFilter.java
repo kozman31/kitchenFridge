@@ -2,24 +2,18 @@ package com.thekitchenfridge.security;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thekitchenfridge.exceptions.AuthenticationExceptionImpl;
-import com.thekitchenfridge.security.entity.User;
-import com.thekitchenfridge.security.entity.UserProfile;
-import com.thekitchenfridge.security.entity.UserProfileImpl;
+import com.thekitchenfridge.users.entity.UserProfileImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -64,7 +58,7 @@ public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse rsp, FilterChain filterChain, Authentication auth){
         String id = UUID.randomUUID().toString().replace("-", "");
         Claims claims = Jwts.claims().setSubject(auth.getName());
-        claims.put("roles", auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
+        //claims.put("roles", auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
         String token = Jwts.builder()
                 .setId(id)
                 .setClaims(claims)

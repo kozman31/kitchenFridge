@@ -10,6 +10,12 @@ spring:
     database-platform: org.hibernate.dialect.MariaDB53Dialect
     hibernate:
       ddl-auto: update
+security:
+  jwt:
+    token:
+      secretKey: secret
+      tokenPrefix: Bearer
+      expirationLength: 3600000
 logging:
   level:
     org.springframework.web: INFO

@@ -1,32 +1,32 @@
 package com.thekitchenfridge.security;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 @Component
 @Slf4j
 public class JwtSecureFields {
 
-    protected final static String SECRET_KEY = generateSecretKey();
+    protected static String SECRET_KEY;
+    protected static String TOKEN_PREFIX;
+    protected static Long EXPIRATION_LENGTH;
 
-    protected static long EXPIRATION_LENGTH = 3600000L;
+    @Value("${security.jwt.token.secret-key}")
+    private void setSecretKey(String secretKey)  {
+        JwtSecureFields.SECRET_KEY = Base64.getEncoder().encodeToString(secretKey.getBytes());
+    }
 
-    protected static String TOKEN_PREFIX = "Bearer";
+    @Value("${security.jwt.token.token-prefix}")
+    private void setTokenPrefix(String tokenPrefix)  {
+        JwtSecureFields.TOKEN_PREFIX = tokenPrefix;
+    }
 
-    private static String generateSecretKey() {
-        try {
-            KeyGenerator keyGener = KeyGenerator.getInstance("HmacSHA256");
-            keyGener.init(512); // here you can pass any valid length
-            SecretKey key = keyGener.generateKey();
-            return Base64.getEncoder().encodeToString(key.getEncoded());
-        } catch (NoSuchAlgorithmException e) {
-            log.error(e.getMessage());
-        }
-        return null;
+    @Value("${security.jwt.token.expiration-length}")
+    private void setExpirationLen(String expTime)  {
+        JwtSecureFields.EXPIRATION_LENGTH = Long.valueOf(expTime);
     }
 }
+

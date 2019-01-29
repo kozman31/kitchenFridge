@@ -1,4 +1,4 @@
-package com.thekitchenfridge.security.entity;
+package com.thekitchenfridge.users.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name="users")
+@Table(name="USERS")
 @Data
 @Builder
 @NoArgsConstructor
@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 public class User implements UserDetails, UserProfile {
 
     @Id
+    @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
@@ -71,4 +72,13 @@ public class User implements UserDetails, UserProfile {
     public boolean isEnabled() {
         return true;
     }
+
+    public List<String> getRoles(){
+        return roles;
+    }
+
+    public void setRoles(List<String> roles){
+        this.roles=roles;
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.thekitchenfridge.security;
 
 
-import com.thekitchenfridge.security.service.UserDetailsServiceImpl;
+import com.thekitchenfridge.users.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,17 +27,18 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .httpBasic().disable()
+            .httpBasic().and()
+            //.formLogin().disable()
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http
             .authorizeRequests()
-            .antMatchers("/auth/signin").permitAll()
-            .antMatchers("/auth/register").permitAll()
+            .antMatchers("/signin").permitAll()
+            .antMatchers("/admin/register").hasAuthority("ADMIN")
             .anyRequest().authenticated()
             .and()
-            .addFilterBefore(new JwtTokenFilter(authenticationManagerBean()), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(new JwtTokenFilter(authenticationManagerBean(), userDetailsService), UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(new BasicAuthFilter( authenticationManagerBean()),UsernamePasswordAuthenticationFilter.class);
 
         http.exceptionHandling()

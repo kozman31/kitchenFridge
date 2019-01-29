@@ -1,6 +1,6 @@
-package com.thekitchenfridge.security.repository;
+package com.thekitchenfridge.users.repository;
 
-import com.thekitchenfridge.security.entity.User;
+import com.thekitchenfridge.users.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

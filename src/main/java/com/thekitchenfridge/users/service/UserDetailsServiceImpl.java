@@ -1,9 +1,9 @@
-package com.thekitchenfridge.security.service;
+package com.thekitchenfridge.users.service;
 
 import com.thekitchenfridge.exceptions.UserExistsException;
-import com.thekitchenfridge.security.entity.User;
-import com.thekitchenfridge.security.entity.UserProfile;
-import com.thekitchenfridge.security.repository.UserRepository;
+import com.thekitchenfridge.users.entity.User;
+import com.thekitchenfridge.users.entity.UserProfileImpl;
+import com.thekitchenfridge.users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,7 +25,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         );
     }
 
-    public User registerNewUser(UserProfile userProfile) throws UserExistsException {
+    public void updateAuthorities(UserProfileImpl userProfile){
+        User user = loadUserByUsername(userProfile.getUsername());
+        user.setRoles(userProfile.getRoles());
+        userRepository.save(user);
+    }
+    public User registerNewUser(UserProfileImpl userProfile) throws UserExistsException {
         if (userExists(userProfile.getUsername())) {
             throw new UserExistsException(
                     "Error: User account" + userProfile.getUsername()+" already exists.");
@@ -33,6 +38,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = User.builder()
                 .username(userProfile.getUsername())
                 .password(userProfile.getPassword())
+                .roles(userProfile.getRoles())
                 .build();
         //user.setFirstName(userProfile.getFirstName());
         //user.setLastName(userProfile.getLastName());
@@ -40,7 +46,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(userProfile.getPassword()));
 
         //user.setEmail(userProfile.getEmail());
-        //user.setRole(new Role(Integer.valueOf(1), user));
         return userRepository.save(user);
     }
 
