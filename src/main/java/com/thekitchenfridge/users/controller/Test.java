@@ -1,0 +1,54 @@
+package com.thekitchenfridge.users.controller;
+
+import com.thekitchenfridge.security.Authority;
+import com.thekitchenfridge.security.Role;
+import com.thekitchenfridge.users.service.AuthorityService;
+import com.thekitchenfridge.users.service.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
+@Controller
+public class Test {
+
+    @Autowired
+    private AuthorityService authorityService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @GetMapping("/admin")
+    public ResponseEntity<String> adminReply(){
+        return new ResponseEntity<>("Hello Admin", HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<String> userReply(){
+        return new ResponseEntity<>("Hello User", HttpStatus.OK);
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> standardReply(){
+        return new ResponseEntity<>("Hello Everyone", HttpStatus.OK);
+    }
+
+    @PostMapping("/auth")
+    public ResponseEntity<String> saveAuth(ArrayList<Authority> auth){
+        authorityService.saveAuthorities(auth);
+        return new ResponseEntity<>("auth saved", HttpStatus.OK);
+    }
+
+    @PostMapping("/roles")
+    public ResponseEntity<String> saveRole(ArrayList<Role> role){
+        roleService.saveRoles(role);
+        return new ResponseEntity<>("role saved", HttpStatus.OK);
+    }
+}

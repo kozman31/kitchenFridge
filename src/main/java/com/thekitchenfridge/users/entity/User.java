@@ -1,19 +1,17 @@
 package com.thekitchenfridge.users.entity;
 
+import com.thekitchenfridge.security.Authority;
+import com.thekitchenfridge.security.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name="USERS")
@@ -26,21 +24,21 @@ public class User implements UserDetails, UserProfile {
     @Id
     @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
     @NotNull
-    String username;
+    private String username;
 
     @NotNull
-    String password;
+    private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
-    private List<String> roles = new ArrayList<>();
+    @ManyToOne(fetch=FetchType.EAGER)
+    private Role role = new Role();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return role.getAuthorities();
     }
 
     @Override
@@ -71,14 +69,6 @@ public class User implements UserDetails, UserProfile {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public List<String> getRoles(){
-        return roles;
-    }
-
-    public void setRoles(List<String> roles){
-        this.roles=roles;
     }
 
 }

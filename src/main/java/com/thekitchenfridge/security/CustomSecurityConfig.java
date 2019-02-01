@@ -27,15 +27,19 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .httpBasic().and()
-            //.formLogin().disable()
+
+            .formLogin().disable()
             .csrf().disable()
+                .headers().frameOptions().disable().and()
+            .httpBasic().and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http
             .authorizeRequests()
-            .antMatchers("/signin").permitAll()
-            .antMatchers("/admin/register").hasAuthority("ADMIN")
+            .antMatchers("/signin", "/auth","/roles","/h2-console/**").permitAll()
+            .antMatchers("/admin/register").permitAll()
+            .antMatchers("/admin").hasAuthority("ADMIN")
+                .antMatchers("/user").hasAuthority("USER")
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(new JwtTokenFilter(authenticationManagerBean(), userDetailsService), UsernamePasswordAuthenticationFilter.class)

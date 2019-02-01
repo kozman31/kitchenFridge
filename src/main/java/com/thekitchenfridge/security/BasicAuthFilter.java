@@ -58,7 +58,7 @@ public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse rsp, FilterChain filterChain, Authentication auth){
         String id = UUID.randomUUID().toString().replace("-", "");
         Claims claims = Jwts.claims().setSubject(auth.getName());
-        //claims.put("roles", auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
+        claims.put("roles", auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
         String token = Jwts.builder()
                 .setId(id)
                 .setClaims(claims)

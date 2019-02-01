@@ -1,5 +1,7 @@
 package com.thekitchenfridge.users.entity;
 
+import com.thekitchenfridge.security.Authority;
+import com.thekitchenfridge.security.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
@@ -17,14 +20,16 @@ public class UserProfileImpl implements UserProfile{
 
     private String username;
     private String password;
-    private List<String> roles;
+    private Role role;
 
-    public List<String> getRoles(){
-        return roles;
+
+    public Set<Authority> getAuthorities(){
+        return role.getAuthorities();
     }
 
-    public Collection<? extends GrantedAuthority> getAuthorities(){
-        return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    @Override
+    public Role getRole() {
+        return role;
     }
 
 }
