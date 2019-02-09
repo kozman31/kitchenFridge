@@ -1,7 +1,7 @@
 package com.thekitchenfridge.users.controller;
 
-import com.thekitchenfridge.security.Authority;
-import com.thekitchenfridge.security.Role;
+import com.thekitchenfridge.security.entities.Authority;
+import com.thekitchenfridge.security.entities.Role;
 import com.thekitchenfridge.users.service.AuthorityService;
 import com.thekitchenfridge.users.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -41,7 +39,7 @@ public class Test {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<String> saveAuth(ArrayList<Authority> auth){
+    public ResponseEntity<String> saveAuth(Set<Authority> auth){
         authorityService.saveAuthorities(auth);
         return new ResponseEntity<>("auth saved", HttpStatus.OK);
     }

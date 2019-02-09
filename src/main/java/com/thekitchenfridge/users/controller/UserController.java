@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
@@ -21,9 +21,16 @@ public class UserController {
     UserDetailsServiceImpl userDetailsService;
 
     @PostMapping(value="/admin/register", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> signup(@RequestBody UserProfileImpl userProfile){
-        userDetailsService.registerNewUser(userProfile);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<String> signup(@RequestBody UserProfileImpl userProfile){
+        if(userDetailsService.registerNewUser(userProfile)){
+            return new ResponseEntity<>("User Registered", HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>("Username Already Exists", HttpStatus.OK);
+    }
+
+    @PostMapping(value="/login")
+    public ResponseEntity<String> login(){
+        return new ResponseEntity<>("Login Successful", HttpStatus.OK);
     }
 
     @PostMapping(value="/auth/update", consumes = MediaType.APPLICATION_JSON_VALUE)

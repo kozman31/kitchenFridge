@@ -1,12 +1,9 @@
 package com.thekitchenfridge.users.entity;
 
-import com.thekitchenfridge.security.Authority;
-import com.thekitchenfridge.security.Role;
-import lombok.Data;
+import com.thekitchenfridge.security.entities.Role;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface UserProfile {
     String username = null;

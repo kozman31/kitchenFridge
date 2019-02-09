@@ -1,26 +1,34 @@
 package com.thekitchenfridge.users.service;
 
-import com.thekitchenfridge.security.Authority;
+import com.thekitchenfridge.security.entities.Authority;
+
 import com.thekitchenfridge.users.repository.AuthorityRepository;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Service
 public class AuthorityService {
 
+    @Autowired
     private AuthorityRepository authorityRepository;
 
-    public List<Authority> getAuthorities(){
-        return authorityRepository.findAll();
+    public Set<Authority> findAllByAuthoritySet(Set<Authority> authorities){
+        return authorityRepository.findAll().stream().filter(authorities::equals).collect(Collectors.toSet());
     }
 
-    public void saveAuthorities(List<Authority>
-                                        authority){
-        authorityRepository.saveAll(authority);
+    public Optional<Authority> findAuthoritiesById(Long authId){
+        return authorityRepository.findById(authId);
     }
+    public List<Authority> saveAuthorities(Set<Authority> authority){
+        return authorityRepository.saveAll(authority);
+    }
+
+
+
+
 }

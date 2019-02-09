@@ -13,9 +13,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+
+import static org.springframework.security.crypto.password.Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm.PBKDF2WithHmacSHA512;
 
 @Configuration
 @EnableWebSecurity
@@ -23,6 +30,9 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private JwtUtility jwt;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -32,18 +42,19 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
                 .headers().frameOptions().disable().and()
             .httpBasic().and()
+            .cors().and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http
             .authorizeRequests()
-            .antMatchers("/signin", "/auth","/roles","/h2-console/**").permitAll()
+            .antMatchers("/login", "/auth","/roles","/h2-console/**").permitAll()
             .antMatchers("/admin/register").permitAll()
             .antMatchers("/admin").hasAuthority("ADMIN")
                 .antMatchers("/user").hasAuthority("USER")
             .anyRequest().authenticated()
             .and()
-            .addFilterBefore(new JwtTokenFilter(authenticationManagerBean(), userDetailsService), UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(new BasicAuthFilter( authenticationManagerBean()),UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(new JwtTokenFilter(authenticationManagerBean(), userDetailsService, jwt), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(new BasicAuthFilter(authenticationManagerBean(), jwt),UsernamePasswordAuthenticationFilter.class);
 
         http.exceptionHandling()
                 .accessDeniedHandler((request, response, accessDeniedException) -> {
@@ -59,14 +70,28 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        configuration.setExposedHeaders(Arrays.asList("Authorization"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public Pbkdf2PasswordEncoder passwordEncoder() {
+        Pbkdf2PasswordEncoder encoder =  new Pbkdf2PasswordEncoder("secrets",1000, 5);
+        encoder.setAlgorithm(PBKDF2WithHmacSHA512);
+        encoder.setEncodeHashAsBase64(true);
+        return encoder;
     }
-
 }

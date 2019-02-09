@@ -25,16 +25,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import static com.thekitchenfridge.security.JwtSecureFields.*;
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Slf4j
 public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
 
+    private JwtUtility jwt;
     private AuthenticationManager authManager;
-
-    public BasicAuthFilter(AuthenticationManager authManager){
+    public BasicAuthFilter(AuthenticationManager authManager, JwtUtility jwt){
         this.authManager = authManager;
+        this.jwt = jwt;
     }
 
     @Override
@@ -55,18 +54,11 @@ public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse rsp, FilterChain filterChain, Authentication auth){
-        String id = UUID.randomUUID().toString().replace("-", "");
-        Claims claims = Jwts.claims().setSubject(auth.getName());
-        claims.put("roles", auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
-        String token = Jwts.builder()
-                .setId(id)
-                .setClaims(claims)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis()+EXPIRATION_LENGTH))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-                .compact();
-        rsp.addHeader(AUTHORIZATION, TOKEN_PREFIX + token);
+    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse rsp, FilterChain filterChain, Authentication auth) throws IOException, ServletException {
+        String token = jwt.buildToken(auth);
+        rsp.addHeader("Authorization", token);
+
+        filterChain.doFilter(req,rsp);
     }
 
     @Override

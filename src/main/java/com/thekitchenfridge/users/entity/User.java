@@ -1,7 +1,6 @@
 package com.thekitchenfridge.users.entity;
 
-import com.thekitchenfridge.security.Authority;
-import com.thekitchenfridge.security.Role;
+import com.thekitchenfridge.security.entities.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +22,7 @@ public class User implements UserDetails, UserProfile {
 
     @Id
     @Column(name = "USER_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

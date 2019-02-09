@@ -1,14 +1,10 @@
-package com.thekitchenfridge.security;
+package com.thekitchenfridge.security.entities;
 
-import com.thekitchenfridge.users.entity.User;
 import lombok.*;
-import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static javax.persistence.GenerationType.*;
 
@@ -23,8 +19,10 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @EqualsAndHashCode.Exclude
-    @Column(name = "ROLE_ID")
     private Long id;
+
+    @Column(name = "ROLE_ID")
+    private Integer roleId;
 
     @Column(name = "ROLE_NAME")
     private String name;

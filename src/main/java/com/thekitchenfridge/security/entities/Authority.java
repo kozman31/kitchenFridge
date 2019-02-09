@@ -1,10 +1,7 @@
-package com.thekitchenfridge.security;
+package com.thekitchenfridge.security.entities;
 
 import com.thekitchenfridge.users.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -18,13 +15,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name="AUTHORITIES")
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Authority implements GrantedAuthority {
 
     @Id
-    @Column(name="AUTHORITY_ID")
+    @EqualsAndHashCode.Exclude
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
+    @Column(name="AUTHORITY_ID")
+    private Long authorityId;
 
     @Column(name="AUTHORITY_NAME")
     private String name;
@@ -33,4 +35,6 @@ public class Authority implements GrantedAuthority {
     public String getAuthority() {
         return name;
     }
+
+
 }
