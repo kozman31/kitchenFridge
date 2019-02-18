@@ -1,9 +1,11 @@
 package com.thekitchenfridge.recipes.entities;
 
+import com.thekitchenfridge.audit.Auditor;
+
 import javax.persistence.*;
 
 @Embeddable
-public class Step {
+public class Step extends Auditor<String> {
 
     private Integer stepNumber;
     private String instructions;

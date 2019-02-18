@@ -1,13 +1,14 @@
 package com.thekitchenfridge.recipes.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.thekitchenfridge.audit.Auditor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Recipe {
+public class Recipe extends Auditor<String> {
 
     @Id
     @GeneratedValue

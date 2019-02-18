@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    @PostMapping(value="/admin/register", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/admin/register")
     public ResponseEntity<String> signup(@RequestBody UserProfileImpl userProfile){
         if(userDetailsService.registerNewUser(userProfile)){
             return new ResponseEntity<>("User Registered", HttpStatus.CREATED);
@@ -33,13 +33,13 @@ public class UserController {
         return new ResponseEntity<>("Login Successful", HttpStatus.OK);
     }
 
-    @PostMapping(value="/auth/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/auth/update")
     public ResponseEntity<HttpStatus> updateUserRoles(@RequestBody UserProfileImpl userProfile){
         userDetailsService.updateAuthorities(userProfile);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping(value="/auth/{user}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/auth/{user}")
     public ResponseEntity userProfile(@PathVariable String username){
         User user = userDetailsService.loadUserByUsername(username);
         if (user == null){

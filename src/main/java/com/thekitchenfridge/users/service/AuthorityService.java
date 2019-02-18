@@ -18,7 +18,7 @@ public class AuthorityService {
     private AuthorityRepository authorityRepository;
 
     public Set<Authority> findAllByAuthoritySet(Set<Authority> authorities){
-        return authorityRepository.findAll().stream().filter(authorities::equals).collect(Collectors.toSet());
+        return authorityRepository.findAll().stream().filter(authorities::contains).collect(Collectors.toSet());
     }
 
     public Optional<Authority> findAuthoritiesById(Long authId){

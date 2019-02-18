@@ -11,9 +11,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.*;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -21,6 +23,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.springframework.security.crypto.password.Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm.PBKDF2WithHmacSHA512;
 
@@ -47,14 +51,15 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
             .authorizeRequests()
-            .antMatchers("/login", "/auth","/roles","/h2-console/**").permitAll()
+            .antMatchers( "/auth","/roles","/h2-console/**").permitAll()
             .antMatchers("/admin/register").permitAll()
-            .antMatchers("/admin").hasAuthority("ADMIN")
-                .antMatchers("/user").hasAuthority("USER")
+            .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/user/**").hasAuthority("USER")
             .anyRequest().authenticated()
             .and()
-            .addFilterBefore(new JwtTokenFilter(authenticationManagerBean(), userDetailsService, jwt), UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(new BasicAuthFilter(authenticationManagerBean(), jwt),UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(new BasicAuthFilter(authenticationManagerBean(), jwt),UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(new JwtTokenFilter(authenticationManagerBean(), userDetailsService, jwt), UsernamePasswordAuthenticationFilter.class);
+
 
         http.exceptionHandling()
                 .accessDeniedHandler((request, response, accessDeniedException) -> {
@@ -67,7 +72,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(delegatingPasswordEncoder());
     }
 
     @Bean
@@ -88,10 +93,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public Pbkdf2PasswordEncoder passwordEncoder() {
-        Pbkdf2PasswordEncoder encoder =  new Pbkdf2PasswordEncoder("secrets",1000, 5);
-        encoder.setAlgorithm(PBKDF2WithHmacSHA512);
-        encoder.setEncodeHashAsBase64(true);
-        return encoder;
+    public PasswordEncoder delegatingPasswordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

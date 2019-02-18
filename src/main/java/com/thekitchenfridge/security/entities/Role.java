@@ -1,5 +1,6 @@
 package com.thekitchenfridge.security.entities;
 
+import com.thekitchenfridge.audit.Auditor;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -14,7 +15,7 @@ import static javax.persistence.GenerationType.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role implements GrantedAuthority {
+public class Role extends Auditor<String> implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

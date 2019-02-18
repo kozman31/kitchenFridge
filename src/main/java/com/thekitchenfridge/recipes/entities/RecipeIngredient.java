@@ -1,11 +1,13 @@
 package com.thekitchenfridge.recipes.entities;
 
+import com.thekitchenfridge.audit.Auditor;
+
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Embeddable
-public class RecipeIngredient {
+public class RecipeIngredient extends Auditor<String> {
 
     public enum MUnit {
         TSP, TBSP, FLOZ, CUP, PINT, QUART, GAL, ML, L, DL, LB, OZ, MG, GRAM, KG, MM, CM, M, INCH

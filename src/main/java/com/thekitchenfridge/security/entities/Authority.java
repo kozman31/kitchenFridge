@@ -1,5 +1,6 @@
 package com.thekitchenfridge.security.entities;
 
+import com.thekitchenfridge.audit.Auditor;
 import com.thekitchenfridge.users.entity.User;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
@@ -18,7 +19,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Authority implements GrantedAuthority {
+public class Authority extends Auditor<String> implements GrantedAuthority {
 
     @Id
     @EqualsAndHashCode.Exclude

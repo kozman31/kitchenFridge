@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-public interface UserProfile {
+public interface UserProfile  {
     String username = null;
     String password = null;
     Role role = null;

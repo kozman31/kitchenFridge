@@ -1,6 +1,8 @@
 package com.thekitchenfridge.recipes.entities;
 
-public class Ingredient {
+import com.thekitchenfridge.audit.Auditor;
+
+public class Ingredient extends Auditor<String> {
 
 
     private long id;
