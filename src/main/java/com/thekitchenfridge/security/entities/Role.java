@@ -23,7 +23,7 @@ public class Role extends Auditor<String> implements GrantedAuthority {
     private Long id;
 
     @Column(name = "ROLE_ID")
-    private Integer roleId;
+    private Long roleId;
 
     @Column(name = "ROLE_NAME")
     private String name;
@@ -38,6 +38,10 @@ public class Role extends Auditor<String> implements GrantedAuthority {
     }
 
     public Set<Authority> getAuthorities(){
+        authorities.add(Authority.builder()
+                .name(name)
+                .authorityId(roleId)
+                .build());
         return authorities;
     }
 

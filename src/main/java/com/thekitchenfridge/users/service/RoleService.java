@@ -19,7 +19,7 @@ public class RoleService {
         return roleRepository.findRolesByName(name);
     }
 
-    public List<Role> findRolesByRoleId(Integer roleId){
+    public List<Role> findRolesByRoleId(Long roleId){
         return roleRepository.findRolesByRoleId(roleId);
     }
     public Role saveRole(Role role){

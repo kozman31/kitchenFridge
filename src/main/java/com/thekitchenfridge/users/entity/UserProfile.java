@@ -1,19 +1,30 @@
 package com.thekitchenfridge.users.entity;
 
+import com.thekitchenfridge.audit.Auditor;
+import com.thekitchenfridge.security.entities.Authority;
 import com.thekitchenfridge.security.entities.Role;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
+import java.util.Set;
 
-public interface UserProfile  {
-    String username = null;
-    String password = null;
-    Role role = null;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+public abstract class UserProfile extends Auditor<String> {
+    String username;
+    @ToString.Exclude
+    String password;
+    @ToString.Exclude
+    Role role;
+    String firstName;
+    String lastName;
+    String jobTitle;
+    String location;
 
-    void setUsername(String username);
-    String getUsername();
-    void setPassword(String password);
-    String getPassword();
-    Collection<? extends GrantedAuthority> getAuthorities();
-    Role getRole();
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        return role.getAuthorities();
+    }
 }

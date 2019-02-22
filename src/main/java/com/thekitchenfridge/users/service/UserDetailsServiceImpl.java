@@ -4,6 +4,7 @@ import com.thekitchenfridge.exceptions.UserExistsException;
 import com.thekitchenfridge.security.entities.Authority;
 import com.thekitchenfridge.security.entities.Role;
 import com.thekitchenfridge.users.entity.User;
+import com.thekitchenfridge.users.entity.UserProfile;
 import com.thekitchenfridge.users.entity.UserProfileImpl;
 import com.thekitchenfridge.users.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -31,9 +31,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+    public User loadUserByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(
-                ()-> new UsernameNotFoundException("User "+ username + "not found")
+                ()-> new UsernameNotFoundException("User "+ username + " not found")
         );
     }
 
@@ -54,8 +54,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-            //user.setFirstName(userProfile.getFirstName());
-            //user.setLastName(userProfile.getLastName());
+            user.setFirstName(userProfile.getFirstName());
+            user.setLastName(userProfile.getLastName());
+            user.setLocation(userProfile.getLocation());
+            user.setJobTitle(userProfile.getJobTitle());
             //user.setEmail(userProfile.getEmail());
             userRepository.save(user);
             return true;
@@ -63,7 +65,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return false;
     }
 
-    private boolean userExists(String username){
+    public boolean userExists(String username){
         return userRepository.findByUsername(username).isPresent();
     }
 
@@ -88,5 +90,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             activeAuthorities = authorityService.saveAuthorities(activeAuthorities).stream().collect(Collectors.toSet());
         }
         return activeAuthorities;
+    }
+
+    public void updateUserDetails(User user){
+        userRepository.save(user);
     }
 }

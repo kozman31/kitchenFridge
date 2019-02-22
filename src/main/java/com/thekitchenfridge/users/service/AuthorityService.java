@@ -4,6 +4,7 @@ import com.thekitchenfridge.security.entities.Authority;
 
 import com.thekitchenfridge.users.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class AuthorityService {
     @Autowired
     private AuthorityRepository authorityRepository;
 
-    public Set<Authority> findAllByAuthoritySet(Set<Authority> authorities){
+    public Set<Authority> findAllByAuthoritySet(Set<? extends GrantedAuthority> authorities){
         return authorityRepository.findAll().stream().filter(authorities::contains).collect(Collectors.toSet());
     }
 

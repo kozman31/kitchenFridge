@@ -16,6 +16,8 @@ security:
       secretKey: secret
       tokenPrefix: Bearer
       expirationLength: 3600000
+  user:
+    invalid-cred-limit: 5
 logging:
   level:
     org.springframework.web: INFO

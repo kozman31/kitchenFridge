@@ -52,7 +52,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers( "/auth","/roles","/h2-console/**").permitAll()
-            .antMatchers("/admin/register").permitAll()
+            .antMatchers("/admin/register","/login").permitAll()
             .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/user/**").hasAuthority("USER")
             .anyRequest().authenticated()
