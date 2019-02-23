@@ -18,6 +18,15 @@ public class AuthorityService {
     @Autowired
     private AuthorityRepository authorityRepository;
 
+    public Set<Authority> generateAuthoritySet(Set<Authority> profilesAuthorities){
+        Set<Authority> activeAuthorities = findAllByAuthoritySet(profilesAuthorities);
+        if (!profilesAuthorities.equals(activeAuthorities)) {
+            activeAuthorities.addAll(profilesAuthorities);
+            activeAuthorities = saveAuthorities(activeAuthorities).stream().collect(Collectors.toSet());
+        }
+        return activeAuthorities;
+    }
+
     public Set<Authority> findAllByAuthoritySet(Set<? extends GrantedAuthority> authorities){
         return authorityRepository.findAll().stream().filter(authorities::contains).collect(Collectors.toSet());
     }

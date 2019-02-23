@@ -1,10 +1,8 @@
 package com.thekitchenfridge.users.service;
 
 import com.thekitchenfridge.exceptions.UserExistsException;
-import com.thekitchenfridge.security.entities.Authority;
 import com.thekitchenfridge.security.entities.Role;
 import com.thekitchenfridge.users.entity.User;
-import com.thekitchenfridge.users.entity.UserProfile;
 import com.thekitchenfridge.users.entity.UserProfileImpl;
 import com.thekitchenfridge.users.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -14,9 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -39,13 +34,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public void updateAuthorities(UserProfileImpl userProfile){
         User user = loadUserByUsername(userProfile.getUsername());
-        Role role = generateRole(userProfile);
+        Role role = roleService.generateRole(userProfile);
         user.setRole(role);
         userRepository.save(user);
     }
     public boolean registerNewUser(UserProfileImpl userProfile) throws UserExistsException {
         if (!userExists(userProfile.getUsername())) {
-            Role role = generateRole(userProfile);
+            Role role = roleService.generateRole(userProfile);
             User user = User.builder()
                     .username(userProfile.getUsername())
                     .password(userProfile.getPassword())
@@ -67,29 +62,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public boolean userExists(String username){
         return userRepository.findByUsername(username).isPresent();
-    }
-
-    private Role generateRole(UserProfileImpl userProfile){
-        Role profileRole = userProfile.getRole();
-        Role role = roleService.findRolesByRoleId(profileRole.getRoleId()).stream().filter(
-                singleRole -> profileRole.equals(singleRole)).findFirst()
-                .orElse(Role.builder().name(profileRole.getAuthority()).roleId(profileRole.getRoleId()).build());
-
-        if(!role.getAuthorities().equals(profileRole)) {
-            Set<Authority> activeAuthorities = generateAuthoritySet(userProfile.getAuthorities());
-            role.setAuthorities(activeAuthorities);
-            role = roleService.saveRole(role);
-        }
-        return role;
-    }
-
-    private Set<Authority> generateAuthoritySet(Set<Authority> profilesAuthorities){
-        Set<Authority> activeAuthorities = authorityService.findAllByAuthoritySet(profilesAuthorities);
-        if (!profilesAuthorities.equals(activeAuthorities)) {
-            activeAuthorities.addAll(profilesAuthorities);
-            activeAuthorities = authorityService.saveAuthorities(activeAuthorities).stream().collect(Collectors.toSet());
-        }
-        return activeAuthorities;
     }
 
     public void updateUserDetails(User user){
