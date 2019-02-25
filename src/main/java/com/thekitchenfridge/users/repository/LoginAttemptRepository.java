@@ -1,6 +1,6 @@
-package com.thekitchenfridge.security;
+package com.thekitchenfridge.users.repository;
 
-import com.thekitchenfridge.security.loginservices.LoginAttempt;
+import com.thekitchenfridge.security.entities.LoginAttempt;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

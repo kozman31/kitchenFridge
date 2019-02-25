@@ -1,6 +1,7 @@
 package com.thekitchenfridge.security.loginservices;
 
-import com.thekitchenfridge.security.LoginAttemptRepository;
+import com.thekitchenfridge.security.entities.LoginAttempt;
+import com.thekitchenfridge.users.repository.LoginAttemptRepository;
 import com.thekitchenfridge.users.entity.User;
 import com.thekitchenfridge.users.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

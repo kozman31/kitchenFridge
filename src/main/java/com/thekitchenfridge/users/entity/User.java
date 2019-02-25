@@ -2,14 +2,12 @@ package com.thekitchenfridge.users.entity;
 
 import com.thekitchenfridge.audit.UserHistoryListener;
 import com.thekitchenfridge.security.entities.Role;
-import com.thekitchenfridge.security.loginservices.LoginAttempt;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 

@@ -1,8 +1,7 @@
-package com.thekitchenfridge.security.loginservices;
+package com.thekitchenfridge.security.entities;
 
 import com.thekitchenfridge.audit.Auditor;
 import com.thekitchenfridge.audit.LoginAttemptHistoryListener;
-import com.thekitchenfridge.security.LoginAttemptHistory;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;

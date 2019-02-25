@@ -22,7 +22,7 @@ public class AuthorityService {
         Set<Authority> activeAuthorities = findAllByAuthoritySet(profilesAuthorities);
         if (!profilesAuthorities.equals(activeAuthorities)) {
             activeAuthorities.addAll(profilesAuthorities);
-            activeAuthorities = saveAuthorities(activeAuthorities).stream().collect(Collectors.toSet());
+            activeAuthorities = saveAuthorities(activeAuthorities);
         }
         return activeAuthorities;
     }
@@ -31,11 +31,8 @@ public class AuthorityService {
         return authorityRepository.findAll().stream().filter(authorities::contains).collect(Collectors.toSet());
     }
 
-    public Optional<Authority> findAuthoritiesById(Long authId){
-        return authorityRepository.findById(authId);
-    }
-    public List<Authority> saveAuthorities(Set<Authority> authority){
-        return authorityRepository.saveAll(authority);
+    public Set<Authority> saveAuthorities(Set<Authority> authority){
+        return authorityRepository.saveAll(authority).stream().collect(Collectors.toSet());
     }
 
 

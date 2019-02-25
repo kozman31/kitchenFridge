@@ -1,7 +1,7 @@
 package com.thekitchenfridge.audit;
 
-import com.thekitchenfridge.security.LoginAttemptHistory;
-import com.thekitchenfridge.security.loginservices.LoginAttempt;
+import com.thekitchenfridge.security.entities.LoginAttemptHistory;
+import com.thekitchenfridge.security.entities.LoginAttempt;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PrePersist;

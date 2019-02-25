@@ -20,22 +20,17 @@ public class RoleService {
     @Autowired
     private AuthorityService authorityService;
 
-    public Role generateRole(UserProfileImpl userProfile){
-        Role profileRole = userProfile.getRole();
+    public Role generateRole(Role profileRole){
         Role role = findRolesByRoleId(profileRole.getRoleId()).stream().filter(
                 singleRole -> profileRole.equals(singleRole)).findFirst()
                 .orElse(Role.builder().name(profileRole.getAuthority()).roleId(profileRole.getRoleId()).build());
 
         if(!role.getAuthorities().equals(profileRole)) {
-            Set<Authority> activeAuthorities = authorityService.generateAuthoritySet(userProfile.getAuthorities());
+            Set<Authority> activeAuthorities = authorityService.generateAuthoritySet(profileRole.getAuthorities());
             role.setAuthorities(activeAuthorities);
             role = saveRole(role);
         }
         return role;
-    }
-
-    public List<Role> findRolesByName(String name){
-        return roleRepository.findRolesByName(name);
     }
 
     public List<Role> findRolesByRoleId(Long roleId){
@@ -45,7 +40,4 @@ public class RoleService {
         return roleRepository.save(role);
     }
 
-    public void saveRoles(List<Role> role){
-        roleRepository.saveAll(role);
-    }
 }

@@ -1,6 +1,6 @@
-package com.thekitchenfridge.security;
+package com.thekitchenfridge.security.entities;
 
-import com.thekitchenfridge.security.loginservices.LoginAttempt;
+import com.thekitchenfridge.security.entities.LoginAttempt;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,3 +40,4 @@ public class LoginAttemptHistory {
         this.invalidLoginCount = loginAttempt.getInvalidLoginCount();
     }
 }
+

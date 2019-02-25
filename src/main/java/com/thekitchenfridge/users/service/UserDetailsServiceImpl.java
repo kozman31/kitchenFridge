@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private RoleService roleService;
-    private AuthorityService authorityService;
     private UserRepository userRepository;
 
     @Autowired
@@ -34,13 +33,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public void updateAuthorities(UserProfileImpl userProfile){
         User user = loadUserByUsername(userProfile.getUsername());
-        Role role = roleService.generateRole(userProfile);
+        Role role = roleService.generateRole(userProfile.getRole());
         user.setRole(role);
         userRepository.save(user);
     }
     public boolean registerNewUser(UserProfileImpl userProfile) throws UserExistsException {
         if (!userExists(userProfile.getUsername())) {
-            Role role = roleService.generateRole(userProfile);
+            Role role = roleService.generateRole(userProfile.getRole());
             User user = User.builder()
                     .username(userProfile.getUsername())
                     .password(userProfile.getPassword())

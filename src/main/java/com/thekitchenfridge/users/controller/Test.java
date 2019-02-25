@@ -43,10 +43,4 @@ public class Test {
         authorityService.saveAuthorities(auth);
         return new ResponseEntity<>("auth saved", HttpStatus.OK);
     }
-
-    @PostMapping("/roles")
-    public ResponseEntity<String> saveRole(ArrayList<Role> role){
-        roleService.saveRoles(role);
-        return new ResponseEntity<>("role saved", HttpStatus.OK);
-    }
 }
