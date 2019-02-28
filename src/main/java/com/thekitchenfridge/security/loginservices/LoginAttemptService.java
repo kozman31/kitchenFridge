@@ -37,18 +37,15 @@ public class LoginAttemptService {
         if(userDetailsServiceImpl.userExists(username)){
 
             String sessionIp = getSessionIp();
-            LoginAttempt loginAttempt = loginAttemptRepository.findByUsername(username).orElse(new LoginAttempt());
+            User user = userDetailsServiceImpl.loadUserByUsername(username);
 
-            if(loginAttempt.getUsername()==null) {
+            LoginAttempt loginAttempt = loginAttemptRepository.findByUsername(username).orElse(firstLogin(user));
 
-            loginAttempt.setUsername(username);
-            }
             loginAttempt.setSessionIp(sessionIp);
             loginAttempt.invalidLoginAttempted();
             loginAttemptRepository.save(loginAttempt);
 
             if(INVALID_LOGIN_LIMIT < loginAttempt.getInvalidLoginCount()){
-                User user = userDetailsServiceImpl.loadUserByUsername(username);
                 user.lockAccount(true);
                 userDetailsServiceImpl.updateUserDetails(user);
             }
@@ -60,17 +57,20 @@ public class LoginAttemptService {
 
         String username = succcussfulAuth.getName();
         String sessionIp = getSessionIp();
-        LoginAttempt loginAttempt = loginAttemptRepository.findByUsername(username).orElse(new LoginAttempt());
+        User user = userDetailsServiceImpl.loadUserByUsername(username);
+
+        LoginAttempt loginAttempt = loginAttemptRepository.findByUsername(username).orElse(firstLogin(user));
 
         loginAttempt.setSessionIp(sessionIp);
         loginAttempt.resetLoginAttemptCount();
         Date lastValidLogin = Date.from(new Date().toInstant());
         loginAttempt.setLastValidLogin(lastValidLogin);
-        loginAttemptRepository.save(loginAttempt);
+        loginAttempt = loginAttemptRepository.save(loginAttempt);
 
-        User user = userDetailsServiceImpl.loadUserByUsername(username);
-        user.setLastLoginDate(lastValidLogin);
-        userDetailsServiceImpl.updateUserDetails(user);
+        if(user.getLastLoginAttempt()==null) {
+            user.setLastLoginAttempt(loginAttempt);
+            userDetailsServiceImpl.updateUserDetails(user);
+        }
     }
 
     private String getSessionIp(){
@@ -83,5 +83,10 @@ public class LoginAttemptService {
             }
         }
         return sessionIp;
+    }
+
+    private LoginAttempt firstLogin(User user){
+        LoginAttempt firstLogin = new LoginAttempt(user);
+        return firstLogin;
     }
 }

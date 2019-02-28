@@ -1,6 +1,7 @@
 package com.thekitchenfridge.users.entity;
 
 import com.thekitchenfridge.audit.UserHistoryListener;
+import com.thekitchenfridge.security.entities.LoginAttempt;
 import com.thekitchenfridge.security.entities.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,16 +36,16 @@ public class User  extends UserProfile implements UserDetails {
     @NotNull
     private String password;
 
-    @Builder.Default
     @ToString.Exclude
     @ManyToOne(fetch=FetchType.EAGER)
-    private Role role = new Role();
+    private Role role;
 
     @Builder.Default
     private Boolean isLocked = false;
 
-    @Temporal(TIMESTAMP)
-    private Date lastLoginDate;
+    @OneToOne
+    @ToString.Exclude
+    private LoginAttempt lastLoginAttempt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

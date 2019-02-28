@@ -2,8 +2,10 @@ package com.thekitchenfridge.security.entities;
 
 import com.thekitchenfridge.audit.Auditor;
 import com.thekitchenfridge.audit.LoginAttemptHistoryListener;
+import com.thekitchenfridge.users.entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -24,15 +26,16 @@ public class LoginAttempt extends Auditor<String> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @OneToOne
+    @ToString.Exclude
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    User user;
+
     String username;
 
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
-
-    @CreatedDate
-    @Temporal(TIMESTAMP)
-    private Date createdDate;
 
     private Integer invalidLoginCount = 0;
     private String sessionIp;
@@ -48,12 +51,13 @@ public class LoginAttempt extends Auditor<String> {
         invalidLoginCount = 0;
     }
 
-    public LoginAttempt(String username, String sessionIp){
-        this.username = username;
+    public LoginAttempt(User user, String sessionIp){
+        this.user = user;
+        this.username = user.getUsername();
         this.sessionIp = sessionIp;
     }
-
-    @OneToMany
-    @Column(name="FK_login_attempt_hist")
-    List<LoginAttemptHistory> loginAttemptHistoryList;
+    public LoginAttempt(User user){
+        this.user = user;
+        this.username = user.getUsername();
+    }
 }
