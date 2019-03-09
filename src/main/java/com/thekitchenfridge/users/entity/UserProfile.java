@@ -21,7 +21,6 @@ public abstract class UserProfile extends Auditor<String> {
     Role role;
     String firstName;
     String lastName;
-    String jobTitle;
     String location;
 
     public Collection<? extends GrantedAuthority> getAuthorities(){
