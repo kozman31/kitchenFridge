@@ -2,9 +2,7 @@ package com.thekitchenfridge.users.service;
 
 import com.thekitchenfridge.security.entities.Authority;
 import com.thekitchenfridge.security.entities.Role;
-import com.thekitchenfridge.users.entity.UserProfileImpl;
 import com.thekitchenfridge.users.repository.RoleRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

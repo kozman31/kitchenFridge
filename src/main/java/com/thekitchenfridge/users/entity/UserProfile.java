@@ -1,13 +1,11 @@
 package com.thekitchenfridge.users.entity;
 
 import com.thekitchenfridge.audit.Auditor;
-import com.thekitchenfridge.security.entities.Authority;
 import com.thekitchenfridge.security.entities.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +20,7 @@ public abstract class UserProfile extends Auditor<String> {
     String firstName;
     String lastName;
     String location;
+    String email;
 
     public Collection<? extends GrantedAuthority> getAuthorities(){
         return role.getAuthorities();

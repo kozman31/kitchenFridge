@@ -1,14 +1,11 @@
 package com.thekitchenfridge.users.service;
 
 import com.thekitchenfridge.security.entities.Authority;
-
 import com.thekitchenfridge.users.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 

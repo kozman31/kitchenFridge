@@ -1,12 +1,12 @@
 package com.thekitchenfridge.users.service;
 
+import com.thekitchenfridge.email.EmailService;
 import com.thekitchenfridge.exceptions.UserExistsException;
 import com.thekitchenfridge.security.entities.Role;
 import com.thekitchenfridge.users.entity.User;
 import com.thekitchenfridge.users.entity.UserProfileImpl;
 import com.thekitchenfridge.users.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,12 +14,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @Slf4j
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private RoleService roleService;
+    private EmailService emailService;
     private UserRepository userRepository;
 
     @Autowired
@@ -52,9 +55,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             user.setFirstName(userProfile.getFirstName());
             user.setLastName(userProfile.getLastName());
             user.setLocation(userProfile.getLocation());
-            user.setJobTitle(userProfile.getJobTitle());
-            //user.setEmail(userProfile.getEmail());
+            user.setEmail(userProfile.getEmail());
             userRepository.save(user);
+
+            String id = UUID.randomUUID().toString();
+            emailService.confirmNewUser(id, user);
+
             return true;
         }
         return false;

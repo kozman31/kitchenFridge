@@ -1,6 +1,5 @@
 package com.thekitchenfridge.security.entities;
 
-import com.thekitchenfridge.security.entities.LoginAttempt;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;

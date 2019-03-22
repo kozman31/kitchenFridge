@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="com.thekitchenfridge.users.repository.RoleRepository" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/repository/RoleRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="106" width="238" x="2092" y="1075"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="2" language="java" name="com.thekitchenfridge.users.service.AuthorityService" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/service/AuthorityService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="383" x="1648" y="1075"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.thekitchenfridge.security.loginservices.AuthFailureListener" 
+    project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/loginservices/AuthFailureListener.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="412" x="20" y="132"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="4" language="java" name="com.thekitchenfridge.audit.Action" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/audit/Action.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="178" width="154" x="1015" y="1075"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="5" language="java" name="com.thekitchenfridge.users.controller.UserController" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/controller/UserController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="394" x="2116" y="350"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.thekitchenfridge.users.entity.UserProfileImpl" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/entity/UserProfileImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="206" x="2412" y="1075"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.thekitchenfridge.security.entities.LoginAttemptHistory" 
+    project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/entities/LoginAttemptHistory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="229" x="389" y="1075"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="com.thekitchenfridge.users.repository.LoginAttemptRepository" 
+    project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/repository/LoginAttemptRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="88" width="308" x="20" y="586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="com.thekitchenfridge.security.entities.Authority" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/entities/Authority.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="211" x="2052" y="1709"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.thekitchenfridge.security.entities.LoginAttempt" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/entities/LoginAttempt.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="250" width="211" x="639" y="1419"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="com.thekitchenfridge.users.repository.UserRepository" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/repository/UserRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="88" width="258" x="1287" y="840"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="com.thekitchenfridge.audit.JpaAuditConfig" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/audit/JpaAuditConfig.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="106" width="240" x="848" y="132"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.thekitchenfridge.audit.Auditor" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/audit/Auditor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="159" width="157" x="2647" y="586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="14" language="java" name="com.thekitchenfridge.users.repository.AuthorityRepository" 
+    project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/repository/AuthorityRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="70" width="216" x="1692" y="1419"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="15" language="java" name="com.thekitchenfridge.security.entities.Role" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/entities/Role.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="178" width="211" x="2351" y="1419"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.thekitchenfridge.security.loginservices.LoginAttemptService" 
+    project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/loginservices/LoginAttemptService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="254" x="349" y="350"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.thekitchenfridge.audit.BeanUtility" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/audit/BeanUtility.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="296" x="679" y="1075"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.thekitchenfridge.security.CustomSecurityConfig" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/CustomSecurityConfig.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="178" width="332" x="1406" y="132"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.thekitchenfridge.security.JwtTokenFilter" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/JwtTokenFilter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="106" width="447" x="968" y="350"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.thekitchenfridge.users.controller.Test" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/controller/Test.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="321" x="1608" y="586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.thekitchenfridge.users.entity.UserProfile" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/entity/UserProfile.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="195" width="350" x="2412" y="840"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.thekitchenfridge.audit.LoginAttemptHistoryListener" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/audit/LoginAttemptHistoryListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="227" x="389" y="840"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.thekitchenfridge.users.entity.User" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/entity/User.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="304" width="350" x="1216" y="1075"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.thekitchenfridge.users.entity.UserHistory" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/entity/UserHistory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="178" width="190" x="1015" y="840"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="com.thekitchenfridge.audit.AuditorAwareImpl" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/audit/AuditorAwareImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="264" x="643" y="350"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="com.thekitchenfridge.audit.UserHistoryListener" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/audit/UserHistoryListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="170" x="1123" y="586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="com.thekitchenfridge.security.JwtUtility" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/JwtUtility.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="214" width="406" x="677" y="586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.thekitchenfridge.users.service.RoleService" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/service/RoleService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="234" x="2052" y="840"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.thekitchenfridge.security.loginservices.AuthSuccessListner" 
+    project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/loginservices/AuthSuccessListner.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="336" x="472" y="132"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.thekitchenfridge.users.service.UserDetailsServiceImpl" 
+    project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/service/UserDetailsServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="265" x="2065" y="586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.thekitchenfridge.security.BasicAuthFilter" project="kitchenfridge" 
+    file="/kitchenfridge/src/main/java/com/thekitchenfridge/security/BasicAuthFilter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="600" x="1455" y="350"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="32">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <association id="33">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="34" name="action"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="37" name="lastLoginAttempt"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="39">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="40" name="authorities"/>      
+      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="43" name="roleService"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="45">    
+    <bendpoint x="358" y="586"/>    
+    <bendpoint x="358" y="840"/>    
+    <bendpoint x="358" y="1075"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <association id="46">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="47" name="userDetailsService"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="50" name="role"/>      
+      <multiplicity id="51" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="53" name="userDetailsService"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="55">    
+    <bendpoint x="2360" y="586"/>    
+    <bendpoint x="2360" y="840"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="56">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <association id="57">    
+    <bendpoint x="2085" y="350"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="58" name="userDetailsService"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="61" name="jwt"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="63">    
+    <bendpoint x="337" y="840"/>    
+    <bendpoint x="337" y="1075"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="64">    
+    <bendpoint x="648" y="1075"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <association id="65">    
+    <bendpoint x="2648" y="1075"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="66" name="role"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="68">    
+    <bendpoint x="2381" y="586"/>    
+    <bendpoint x="2381" y="840"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <association id="69">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="70" name="jwt"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="72">    
+    <bendpoint x="1575" y="840"/>    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <dependency id="73">    
+    <bendpoint x="1596" y="840"/>    
+    <bendpoint x="1596" y="1075"/>    
+    <bendpoint x="1596" y="1419"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <association id="74">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="75" name="user"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="77">    
+    <bendpoint x="1323" y="586"/>    
+    <bendpoint x="1256" y="840"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <association id="78">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="79" name="role"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="81">    
+    <bendpoint x="1938" y="1419"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <association id="82">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="83" name="userRepository"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="85">    
+    <bendpoint x="2339" y="840"/>    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <association id="86">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="87" name="roleService"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="89">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="90" name="user"/>      
+      <multiplicity id="91" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="92">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <dependency id="93">    
+    <bendpoint x="2592" y="1419"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <association id="94">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="95" name="userDetailsServiceImpl"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="97">    
+    <bendpoint x="2813" y="1419"/>    
+    <bendpoint x="2813" y="1075"/>    
+    <bendpoint x="2813" y="840"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <dependency id="98">    
+    <bendpoint x="2318" y="840"/>    
+    <bendpoint x="2381" y="1075"/>    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="99">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <association id="100">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="101" name="roleRepository"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="103">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <dependency id="104">    
+    <bendpoint x="1235" y="840"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="26"/>  
+  </dependency>  
+  <association id="105">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="106" name="loginAttemptService"/>      
+      <multiplicity id="107" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="108">    
+    <bendpoint x="2061" y="1075"/>    
+    <bendpoint x="2061" y="1419"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="109">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="31"/>  
+  </dependency>  
+  <dependency id="110">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="111">    
+    <bendpoint x="984" y="840"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <association id="112">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="113" name="authorityRepository"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="116" name="loginAttempt"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="118">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <association id="119">    
+    <bendpoint x="1617" y="840"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="120" name="authorityService"/>      
+      <multiplicity id="121" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="122">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="123">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="124">    
+    <bendpoint x="646" y="586"/>    
+    <bendpoint x="646" y="840"/>    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <association id="125">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="126" name="loginAttemptService"/>      
+      <multiplicity id="127" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="129" name="loginAttemptRepository"/>      
+      <multiplicity id="130" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="131">    
+    <bendpoint x="2792" y="1075"/>    
+    <bendpoint x="2792" y="840"/>    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <association id="132">    
+    <bendpoint x="937" y="350"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="133" name="jwt"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="135">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <generalization id="136">    
+    <bendpoint x="1617" y="1075"/>    
+    <bendpoint x="1638" y="840"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <dependency id="137">    
+    <bendpoint x="2360" y="1075"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="138">    
+    <bendpoint x="910" y="840"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <association id="139">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="140" name="authorityService"/>      
+      <multiplicity id="141" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="142">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="143">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

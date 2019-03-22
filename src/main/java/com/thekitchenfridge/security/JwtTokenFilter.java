@@ -1,10 +1,6 @@
 package com.thekitchenfridge.security;
 
-import com.thekitchenfridge.users.entity.User;
 import com.thekitchenfridge.users.service.UserDetailsServiceImpl;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

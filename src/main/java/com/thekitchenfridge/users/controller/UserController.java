@@ -1,7 +1,8 @@
 package com.thekitchenfridge.users.controller;
 
+import com.thekitchenfridge.email.Email;
+import com.thekitchenfridge.email.EmailService;
 import com.thekitchenfridge.users.entity.User;
-import com.thekitchenfridge.users.entity.UserProfile;
 import com.thekitchenfridge.users.entity.UserProfileImpl;
 import com.thekitchenfridge.users.service.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,9 @@ public class UserController {
 
     @Autowired
     UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    EmailService emailService;
 
     @PostMapping(value="/admin/register")
     public ResponseEntity<String> signup(@RequestBody UserProfileImpl userProfile){

@@ -10,6 +10,17 @@ spring:
     database-platform: org.hibernate.dialect.MariaDB53Dialect
     hibernate:
       ddl-auto: create
+  mail:
+    host: smtp.gmail.com
+    PORT: 587
+    username: username
+    password: password
+    properties.mail:
+        transport.protocol: smtp
+        smtp.auth: true
+        smtp.starttls.enable: true
+        smtp.starttls.required: true
+
 security:
   jwt:
     token:
@@ -21,3 +32,4 @@ security:
 logging:
   level:
     org.springframework.web: INFO
+

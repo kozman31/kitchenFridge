@@ -3,7 +3,10 @@ package com.thekitchenfridge.recipes.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.thekitchenfridge.audit.Auditor;
 
-import javax.persistence.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.List;
 
 @Entity

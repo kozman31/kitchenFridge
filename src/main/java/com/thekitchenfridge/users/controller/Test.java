@@ -1,7 +1,6 @@
 package com.thekitchenfridge.users.controller;
 
 import com.thekitchenfridge.security.entities.Authority;
-import com.thekitchenfridge.security.entities.Role;
 import com.thekitchenfridge.users.service.AuthorityService;
 import com.thekitchenfridge.users.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 @Controller

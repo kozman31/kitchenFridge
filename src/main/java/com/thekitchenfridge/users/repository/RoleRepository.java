@@ -1,6 +1,5 @@
 package com.thekitchenfridge.users.repository;
 
-import com.thekitchenfridge.security.entities.Authority;
 import com.thekitchenfridge.security.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

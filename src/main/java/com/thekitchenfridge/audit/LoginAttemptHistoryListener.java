@@ -1,14 +1,15 @@
 package com.thekitchenfridge.audit;
 
-import com.thekitchenfridge.security.entities.LoginAttemptHistory;
 import com.thekitchenfridge.security.entities.LoginAttempt;
+import com.thekitchenfridge.security.entities.LoginAttemptHistory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 
-import static com.thekitchenfridge.audit.Action.*;
+import static com.thekitchenfridge.audit.Action.INSERT;
+import static com.thekitchenfridge.audit.Action.UPDATE;
 
 public class LoginAttemptHistoryListener {
 
