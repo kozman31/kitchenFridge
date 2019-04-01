@@ -9,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
@@ -20,9 +17,6 @@ public class UserController {
 
     @Autowired
     UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
-    EmailService emailService;
 
     @PostMapping(value="/admin/register")
     public ResponseEntity<String> signup(@RequestBody UserProfileImpl userProfile){
@@ -37,13 +31,19 @@ public class UserController {
         return new ResponseEntity<>("Login Successful", HttpStatus.OK);
     }
 
-    @PostMapping(value="/auth/update")
+    @PostMapping(value="/user/update")
     public ResponseEntity<HttpStatus> updateUserRoles(@RequestBody UserProfileImpl userProfile){
         userDetailsService.updateAuthorities(userProfile);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping(value="/auth/{user}")
+    @GetMapping(value="/act/{key}")
+    public ResponseEntity activateUser(@PathVariable String key){
+        System.out.println(key);
+        return new ResponseEntity ( HttpStatus.OK);
+    }
+
+    @GetMapping(value="/users/{username}")
     public ResponseEntity userProfile(@PathVariable String username){
         User user = userDetailsService.loadUserByUsername(username);
         if (user == null){
@@ -51,4 +51,6 @@ public class UserController {
         }
         return new ResponseEntity (user, HttpStatus.OK);
     }
+
+
 }

@@ -58,8 +58,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             user.setEmail(userProfile.getEmail());
             userRepository.save(user);
 
-            String id = UUID.randomUUID().toString();
-            emailService.confirmNewUser(id, user);
+//            String id = UUID.randomUUID().toString();
+//            emailService.confirmNewUser(id, user);
 
             return true;
         }

@@ -1,20 +1,20 @@
 spring:
   profiles:
-    active: dev
+    active:
   datasource:
-    url: jdbc:mariadb://192.168.0.123:3306/kitchen_table
-    username: admin
+    url: jdbc:mysql://192.168.0.140:3307/kitchen_fridge
+    username: kitchen_admin
     password: password
-    driverClassName: org.mariadb.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.MariaDB53Dialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
   mail:
     host: smtp.gmail.com
-    PORT: 587
-    username: username
-    password: password
+    port: 587
+    username: kozman31@gmail.com
+    password: hjbfjxkgmlvkltiw
     properties.mail:
         transport.protocol: smtp
         smtp.auth: true

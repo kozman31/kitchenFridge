@@ -1,12 +1,10 @@
 package com.thekitchenfridge.email;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import com.thekitchenfridge.users.entity.User;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +14,7 @@ import javax.mail.internet.MimeMessage;
 @Slf4j
 @Service
 public class EmailService {
+    @Autowired
     private JavaMailSender javaMailSender;
 
     public void sendMail(final Email email, Boolean isHtml){

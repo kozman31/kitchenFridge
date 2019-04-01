@@ -1,5 +1,7 @@
 package com.thekitchenfridge.users.controller;
 
+import com.thekitchenfridge.email.Email;
+import com.thekitchenfridge.email.EmailService;
 import com.thekitchenfridge.security.entities.Authority;
 import com.thekitchenfridge.users.service.AuthorityService;
 import com.thekitchenfridge.users.service.RoleService;
@@ -19,6 +21,9 @@ public class Test {
     private AuthorityService authorityService;
 
     @Autowired
+    EmailService emailService;
+
+    @Autowired
     private RoleService roleService;
 
     @GetMapping("/admin")
@@ -33,6 +38,9 @@ public class Test {
 
     @GetMapping("/test")
     public ResponseEntity<String> standardReply(){
+        Email email = Email.builder().sender("kozman31@gmail.com").recipient("elliott.kozulak@gmail.com").messageSubject("this is a test").messageBody("testing 123 !@#").build();
+        emailService.sendMail(email, true);
+
         return new ResponseEntity<>("Hello Everyone", HttpStatus.OK);
     }
 
