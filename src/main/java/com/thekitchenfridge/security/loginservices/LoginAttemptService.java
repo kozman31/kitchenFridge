@@ -46,7 +46,7 @@ public class LoginAttemptService {
             loginAttemptRepository.save(loginAttempt);
 
             if(INVALID_LOGIN_LIMIT < loginAttempt.getInvalidLoginCount()){
-                user.lockAccount(true);
+                user.lockAccount();
                 userDetailsServiceImpl.updateUserDetails(user);
             }
 

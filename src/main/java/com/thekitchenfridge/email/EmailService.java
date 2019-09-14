@@ -4,6 +4,7 @@ package com.thekitchenfridge.email;
 import com.thekitchenfridge.users.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,11 @@ import javax.mail.internet.MimeMessage;
 public class EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
+
+    @Value("${spring.mail.sender.admin}")
+    String senderEmail;
+
+
 
     public void sendMail(final Email email, Boolean isHtml){
         MimeMessage mimeMail = javaMailSender.createMimeMessage();
@@ -31,14 +37,11 @@ public class EmailService {
         }
     }
 
-    public void confirmNewUser(final String id, User user){
-//        String emailBody = StringFormat
+    public void activationEmail(User user, final String tokenId){
         Email confirmationEmail = Email.builder()
-                .id(id)
                 .recipient(user.getEmail())
-                .sender("admin@kitchenFridge.com")
-                .messageSubject("Thank you for registering with us!")
-                .build();
+                .sender(senderEmail)
+                .build().addActivationMsg(tokenId);
         sendMail(confirmationEmail, true);
     }
 }

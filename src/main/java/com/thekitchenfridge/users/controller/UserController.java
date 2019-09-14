@@ -37,9 +37,9 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping(value="/act/{key}")
-    public ResponseEntity activateUser(@PathVariable String key){
-        System.out.println(key);
+    @GetMapping(value="/act")
+    public ResponseEntity activateUser(@RequestParam("token") String token){
+        System.out.println(token);
         return new ResponseEntity ( HttpStatus.OK);
     }
 

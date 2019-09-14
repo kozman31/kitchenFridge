@@ -40,6 +40,9 @@ public class User  extends UserProfile implements UserDetails {
     @Builder.Default
     private Boolean isLocked = false;
 
+    @Builder.Default
+    private Boolean isEnabled = false;
+
     @OneToOne
     @ToString.Exclude
     private LoginAttempt lastLoginAttempt;
@@ -76,11 +79,22 @@ public class User  extends UserProfile implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
     }
 
-    public void lockAccount(Boolean isLocked){
-        this.isLocked = isLocked;
+    public void lockAccount(){
+        this.isLocked = true;
     }
 
+    public void unlockAccount(Boolean isLocked){
+        this.isLocked = false;
+    }
+
+    public void activate() {
+        isEnabled = true;
+    }
+
+    public void deactivate() {
+        isEnabled = false;
+    }
 }

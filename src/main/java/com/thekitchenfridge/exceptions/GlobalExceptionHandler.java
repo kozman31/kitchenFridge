@@ -22,6 +22,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return handleException(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(value ={BadActTokenException.class})
+    public ResponseEntity<String> badRegistrationToken(BadActTokenException e){
+        log.debug("Invalid Registration Token: "+e.getMessage());
+        return handleException(e.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
     @ExceptionHandler(value = {UserExistsException.class})
     public ResponseEntity<String> userAlreadyRegisteredHandler(UserExistsException e){
         log.debug("UserRegistered "+e.getMessage());
