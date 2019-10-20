@@ -15,14 +15,8 @@ public abstract class UserProfile extends Auditor<String> {
     String username;
     @ToString.Exclude
     String password;
-    @ToString.Exclude
-    Role role;
     String firstName;
     String lastName;
     String location;
     String email;
-
-    public Collection<? extends GrantedAuthority> getAuthorities(){
-        return role.getAuthorities();
-    }
 }

@@ -12,6 +12,7 @@ import java.util.Set;
 @Service
 public class RoleService {
 
+    enum ROLES{ADMIN, USER_PARENT, USER_CHILD, DEFAULT}
     @Autowired
     private RoleRepository roleRepository;
 

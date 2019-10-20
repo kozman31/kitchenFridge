@@ -3,8 +3,8 @@ spring:
     active: dev
   datasource:
     url: jdbc:mysql://192.168.0.140:3307/kitchen_fridge
-    username:
-    password:
+    username: kitchen_admin
+    password: password
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -13,14 +13,14 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username:
-    password: 
+    username: kozman31@gmail.com
+    password: hjbfjxkgmlvkltiw
     properties.mail:
-        transport.protocol: smtp
-        smtp.auth: true
-        smtp.starttls.enable: true
-        smtp.starttls.required: true
-    sender.admin:
+      transport.protocol: smtp
+      smtp.auth: true
+      smtp.starttls.enable: true
+      smtp.starttls.required: true
+    sender.admin: kozman31@gmail.com
 security:
   jwt:
     token:
@@ -32,4 +32,3 @@ security:
 logging:
   level:
     org.springframework.web: INFO
-

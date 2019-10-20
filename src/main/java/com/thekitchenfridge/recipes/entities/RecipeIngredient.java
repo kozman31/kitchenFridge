@@ -1,6 +1,7 @@
 package com.thekitchenfridge.recipes.entities;
 
 import com.thekitchenfridge.audit.Auditor;
+import com.thekitchenfridge.recipes.MeasurementUnit;
 
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
@@ -9,16 +10,12 @@ import javax.persistence.Enumerated;
 @Embeddable
 public class RecipeIngredient extends Auditor<String> {
 
-    public enum MUnit {
-        TSP, TBSP, FLOZ, CUP, PINT, QUART, GAL, ML, L, DL, LB, OZ, MG, GRAM, KG, MM, CM, M, INCH
-    }
-
     private String name;
     private Double amount;
     private Long idx;
 
     @Enumerated(EnumType.STRING)
-    private MUnit mUnit;
+    private MeasurementUnit mUnit;
 
 
     public String getName() {
@@ -37,11 +34,11 @@ public class RecipeIngredient extends Auditor<String> {
         this.amount = amount;
     }
 
-    public MUnit getmUnit() {
+    public MeasurementUnit getmUnit() {
         return mUnit;
     }
 
-    public void setmUnit(MUnit MUnit) {
+    public void setmUnit(MeasurementUnit MUnit) {
         this.mUnit = MUnit;
     }
 

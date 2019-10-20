@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    @PostMapping(value="/admin/register")
+    @PostMapping(value="/register")
     public ResponseEntity<String> signup(@RequestBody UserProfileImpl userProfile){
         if(userDetailsService.registerNewUser(userProfile)){
             return new ResponseEntity<>("User Registered", HttpStatus.CREATED);
@@ -37,13 +37,13 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping(value="/act")
+    @GetMapping(value="/user/activate")
     public ResponseEntity activateUser(@RequestParam("token") String token){
         System.out.println(token);
         return new ResponseEntity ( HttpStatus.OK);
     }
 
-    @GetMapping(value="/users/{username}")
+    @GetMapping(value="/users/profile/{username}")
     public ResponseEntity userProfile(@PathVariable String username){
         User user = userDetailsService.loadUserByUsername(username);
         if (user == null){
