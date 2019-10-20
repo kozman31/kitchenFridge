@@ -3,7 +3,6 @@ package com.thekitchenfridge.users.service;
 import com.thekitchenfridge.security.entities.Role;
 import com.thekitchenfridge.users.entity.User;
 import com.thekitchenfridge.users.entity.UserProfile;
-import com.thekitchenfridge.users.repository.AuthorityRepository;
 import com.thekitchenfridge.users.repository.RoleRepository;
 import com.thekitchenfridge.users.repository.UserRepository;
 import org.junit.Before;
@@ -14,8 +13,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import static org.junit.Assert.*;
 
 public class UserDetailsServiceImplTest {
 

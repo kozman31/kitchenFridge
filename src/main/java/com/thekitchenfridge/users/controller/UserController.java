@@ -1,9 +1,7 @@
 package com.thekitchenfridge.users.controller;
 
-import com.thekitchenfridge.email.Email;
-import com.thekitchenfridge.email.EmailService;
 import com.thekitchenfridge.users.entity.User;
-import com.thekitchenfridge.users.entity.UserProfileImpl;
+import com.thekitchenfridge.users.entity.UserProfile;
 import com.thekitchenfridge.users.service.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,7 @@ public class UserController {
     UserDetailsServiceImpl userDetailsService;
 
     @PostMapping(value="/register")
-    public ResponseEntity<String> signup(@RequestBody UserProfileImpl userProfile){
+    public ResponseEntity<String> signup(@RequestBody UserProfile userProfile){
         if(userDetailsService.registerNewUser(userProfile)){
             return new ResponseEntity<>("User Registered", HttpStatus.CREATED);
         }
@@ -32,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping(value="/user/update")
-    public ResponseEntity<HttpStatus> updateUserRoles(@RequestBody UserProfileImpl userProfile){
+    public ResponseEntity<HttpStatus> updateUserRoles(@RequestBody UserProfile userProfile){
         userDetailsService.updateAuthorities(userProfile);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

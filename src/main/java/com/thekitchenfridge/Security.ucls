@@ -51,7 +51,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="com.thekitchenfridge.users.entity.UserProfileImpl" project="kitchenfridge" 
+  <class id="6" language="java" name="com.thekitchenfridge.users.entity.UserProfile" project="kitchenfridge"
     file="/kitchenfridge/src/main/java/com/thekitchenfridge/users/entity/UserProfileImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="160" width="206" x="2412" y="1075"/>    

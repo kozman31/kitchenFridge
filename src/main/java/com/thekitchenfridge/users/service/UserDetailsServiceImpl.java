@@ -4,7 +4,7 @@ import com.thekitchenfridge.email.EmailService;
 import com.thekitchenfridge.exceptions.UserExistsException;
 import com.thekitchenfridge.security.entities.Role;
 import com.thekitchenfridge.users.entity.User;
-import com.thekitchenfridge.users.entity.UserProfileImpl;
+import com.thekitchenfridge.users.entity.UserProfile;
 import com.thekitchenfridge.users.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @Slf4j
@@ -35,13 +33,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         );
     }
 
-    public void updateAuthorities(UserProfileImpl userProfile){
+    public void updateAuthorities(UserProfile userProfile){
         User user = loadUserByUsername(userProfile.getUsername());
         Role role = roleService.generateRole(userProfile.getRole());
         user.setRole(role);
         userRepository.save(user);
     }
-    public boolean registerNewUser(UserProfileImpl userProfile) throws UserExistsException {
+    public boolean registerNewUser(UserProfile userProfile) throws UserExistsException {
         if (!userExists(userProfile.getUsername())) {
             Role role = roleService.generateRole(userProfile.getRole());
             User user = User.builder()

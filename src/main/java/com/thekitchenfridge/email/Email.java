@@ -17,8 +17,8 @@ public class Email {
     private String tokenId;
 
     public Email addActivationMsg(String token){
-        messageBody += ACTIVATION_EMAIL+"\n<a href=\"http:\\\\localhost:9090\\activation?t=" + token +
-                "\">http:\\\\localhost:9090\\activation?t=" +token+"</a>";
+        messageBody += ACTIVATION_EMAIL+"\n<a href=\"https:\\\\ekoz.dev\\activation?t=" + token +
+                "\">http:\\\\ekoz.dev\\activation?t=" +token+"</a>";
         return this;
     }
 

@@ -1,5 +1,6 @@
 package com.thekitchenfridge.users.entity;
 
+import com.thekitchenfridge.audit.Auditor;
 import com.thekitchenfridge.audit.UserHistoryListener;
 import com.thekitchenfridge.security.entities.LoginAttempt;
 import com.thekitchenfridge.security.entities.Role;
@@ -18,8 +19,10 @@ import java.util.Collection;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @EntityListeners(UserHistoryListener.class)
-public class User  extends UserProfile implements UserDetails {
+
+public class User extends Auditor<String> implements UserDetails {
 
     @Id
     @ToString.Exclude
@@ -42,6 +45,11 @@ public class User  extends UserProfile implements UserDetails {
 
     @Builder.Default
     private Boolean isEnabled = false;
+
+    private String firstName;
+    private String lastName;
+    private String location;
+    private String email;
 
     @OneToOne
     @ToString.Exclude
