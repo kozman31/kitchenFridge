@@ -2,9 +2,9 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:mysql://192.168.0.140:3307/kitchen_fridge
-    username: kitchen_admin
-    password: password
+    url: 
+    username:
+    password:
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -13,18 +13,18 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: kozman31@gmail.com
-    password: hjbfjxkgmlvkltiw
+    username:
+    password:
     properties.mail:
       transport.protocol: smtp
       smtp.auth: true
       smtp.starttls.enable: true
       smtp.starttls.required: true
-    sender.admin: kozman31@gmail.com
+    sender.admin:
 security:
   jwt:
     token:
-      secretKey: secret
+      secretKey:
       tokenPrefix: Bearer
       expirationLength: 3600000
   user:
