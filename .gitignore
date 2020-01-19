@@ -66,9 +66,6 @@ cmake-build-*/
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
 
-# File-based project format
-*.iws
-
 # IntelliJ
 out/
 
@@ -95,3 +92,5 @@ fabric.properties
 
 # UML Files
 *.plantuml
+*.ucls
+/src/main/resources/application-prod.yaml
