@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name="USERS")
@@ -21,7 +22,6 @@ import java.util.Collection;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @EntityListeners(UserHistoryListener.class)
-
 public class User extends Auditor<String> implements UserDetails {
 
     @Id
@@ -105,4 +105,5 @@ public class User extends Auditor<String> implements UserDetails {
     public void deactivate() {
         isEnabled = false;
     }
+
 }

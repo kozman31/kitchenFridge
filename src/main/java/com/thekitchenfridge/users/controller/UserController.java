@@ -1,13 +1,15 @@
 package com.thekitchenfridge.users.controller;
 
 import com.thekitchenfridge.users.entity.User;
-import com.thekitchenfridge.users.entity.UserProfile;
+import com.thekitchenfridge.users.entity.UserProfileDto;
 import com.thekitchenfridge.users.service.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.management.relation.RoleNotFoundException;
 
 @RestController
 @Slf4j
@@ -17,8 +19,8 @@ public class UserController {
     UserDetailsServiceImpl userDetailsService;
 
     @PostMapping(value="/register")
-    public ResponseEntity<String> signup(@RequestBody UserProfile userProfile){
-        if(userDetailsService.registerNewUser(userProfile)){
+    public ResponseEntity<String> registerUser(@RequestBody UserProfileDto userProfileDto){
+        if(userDetailsService.registerNewUser(userProfileDto)){
             return new ResponseEntity<>("User Registered", HttpStatus.CREATED);
         }
         return new ResponseEntity<>("Username Already Exists", HttpStatus.OK);
@@ -30,8 +32,8 @@ public class UserController {
     }
 
     @PostMapping(value="/user/update")
-    public ResponseEntity<HttpStatus> updateUserRoles(@RequestBody UserProfile userProfile){
-        userDetailsService.updateAuthorities(userProfile);
+    public ResponseEntity<HttpStatus> updateUserRoles(@RequestBody UserProfileDto userProfileDto) throws RoleNotFoundException {
+        userDetailsService.updateAuthorities(userProfileDto);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 

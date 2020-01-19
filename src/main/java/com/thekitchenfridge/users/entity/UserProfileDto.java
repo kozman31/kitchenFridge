@@ -15,23 +15,19 @@ import java.util.Set;
 @AllArgsConstructor()
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class UserProfile extends Auditor<String> implements Serializable {
+public class UserProfileDto extends Auditor<String> implements Serializable {
 
     private String username;
     private String password;
-    private Role role;
+    private Long roleId;
+    private Set<Authority> authorities;
     private String firstName;
     private String lastName;
-    private String location;
     private String email;
 
-
-    public Set<Authority> getAuthorities(){
-        return role.getAuthorities();
+    public UserProfileDto(String username, String password, Long roleId) {
+        this.username = username;
+        this.password = password;
+        this.roleId = roleId;
     }
-
-    public Role getRole() {
-        return role;
-    }
-
 }

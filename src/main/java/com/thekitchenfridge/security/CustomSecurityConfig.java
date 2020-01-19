@@ -46,8 +46,8 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers( "/auth","/roles","/h2-console/**","/user/*").permitAll()
             .antMatchers("/admin/register","/login", "/act/*").permitAll()
-            .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/user/**").hasAuthority("USER")
+            .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("admin, user")
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(new BasicAuthFilter(authenticationManagerBean(), jwt),UsernamePasswordAuthenticationFilter.class)
@@ -71,7 +71,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setExposedHeaders(Arrays.asList("Authorization"));

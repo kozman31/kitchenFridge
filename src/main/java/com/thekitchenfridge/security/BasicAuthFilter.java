@@ -2,7 +2,7 @@ package com.thekitchenfridge.security;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thekitchenfridge.users.entity.UserProfile;
+import com.thekitchenfridge.users.entity.UserProfileDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,7 +31,7 @@ public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
         try{
-            UserProfile user = new ObjectMapper().readValue(req.getInputStream(), UserProfile.class);
+            UserProfileDto user = new ObjectMapper().readValue(req.getInputStream(), UserProfileDto.class);
             return authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getUsername(),

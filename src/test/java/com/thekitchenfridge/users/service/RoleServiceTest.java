@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.management.relation.RoleNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -92,9 +93,9 @@ public class RoleServiceTest {
         authoritySetAdmin2.addAll(authorityListAdmin2);
         authoritySetUser.addAll(authorityListUser1);
 
-        roleAdmin1 = Role.builder().roleId(1L).name("ROLE_ADMIN").authorities(authoritySetAdmin1).build();
-        roleAdmin2 = Role.builder().roleId(1L).name("ROLE_ADMIN").authorities(authoritySetAdmin2).build();
-        roleUser = Role.builder().roleId(2L).name("ROLE_USER").authorities(authoritySetUser).build();
+        roleAdmin1 = Role.builder().roleId(1L).roleName("ROLE_ADMIN").authorities(authoritySetAdmin1).build();
+        roleAdmin2 = Role.builder().roleId(1L).roleName("ROLE_ADMIN").authorities(authoritySetAdmin2).build();
+        roleUser = Role.builder().roleId(2L).roleName("ROLE_USER").authorities(authoritySetUser).build();
 
         Mockito.when(roleRepository.save(Mockito.any(Role.class))).then(i -> i.getArguments()[0]);
 
@@ -107,27 +108,27 @@ public class RoleServiceTest {
 
     @Test
     public void generateRoleAdmin1() {
-        Mockito.when(roleRepository.findRolesByRoleId(Mockito.anyLong())).thenReturn(Arrays.asList(roleAdmin1,roleAdmin2));
+        Mockito.when(roleRepository.findRoleByRoleId(Mockito.anyLong())).thenReturn(Optional.ofNullable(roleAdmin1));
         Mockito.when(authorityService.generateAuthoritySet(Mockito.anySet())).thenReturn(authoritySetAdmin1);
 
-        Role role = roleService.generateRole(roleAdmin1);
+        Role role = roleService.createRole(roleAdmin1);
         assertEquals(roleAdmin1, role);
     }
 
     @Test
     public void generateRoleAdmin2() {
-        Mockito.when(roleRepository.findRolesByRoleId(Mockito.anyLong())).thenReturn(Arrays.asList(roleAdmin1,roleAdmin2));
+        Mockito.when(roleRepository.findRoleByRoleId(Mockito.anyLong())).thenReturn(Optional.ofNullable(roleAdmin2));
         Mockito.when(authorityService.generateAuthoritySet(Mockito.anySet())).thenReturn(authoritySetAdmin2);
 
-        Role role = roleService.generateRole(roleAdmin1);
-        assertEquals(roleAdmin2, role);
+        Role role = roleService.createRole(roleAdmin2);
+        assertEquals(Optional.ofNullable(roleAdmin2), role);
     }
 
     @Test
-    public void findRolesByRoleId() {
-        Mockito.when(roleRepository.findRolesByRoleId(Mockito.anyLong())).thenReturn(Arrays.asList(roleAdmin1,roleAdmin2));
-        List<Role> roles = roleService.findRolesByRoleId(1L);
-        assertEquals(Arrays.asList(roleAdmin1,roleAdmin2), roles);
+    public void findRolesByRoleId() throws RoleNotFoundException {
+        Mockito.when(roleRepository.findRoleByRoleId(Mockito.anyLong())).thenReturn(Optional.ofNullable(roleAdmin1));
+        Role roles = roleService.findRolesByRoleId(1L);
+        assertEquals(Optional.ofNullable(roleAdmin1), roles);
     }
 
     @Test

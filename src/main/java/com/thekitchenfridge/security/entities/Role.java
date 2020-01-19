@@ -2,6 +2,7 @@ package com.thekitchenfridge.security.entities;
 
 import com.thekitchenfridge.audit.Auditor;
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -16,18 +17,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class Role extends Auditor<String> implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @EqualsAndHashCode.Exclude
-    private Long id;
-
     @Column(name = "ROLE_ID")
     private Long roleId;
 
     @Column(name = "ROLE_NAME")
-    private String name;
+    @UniqueElements
+    private String roleName;
 
     @ManyToMany(fetch=FetchType.EAGER)
     @Builder.Default
@@ -35,12 +36,12 @@ public class Role extends Auditor<String> implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return name;
+        return roleName;
     }
 
     public Set<Authority> getAuthorities(){
         authorities.add(Authority.builder()
-                .name(name)
+                .name(roleName)
                 .authorityId(roleId)
                 .build());
         return authorities;
