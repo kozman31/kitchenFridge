@@ -54,14 +54,14 @@ public class JwtUtility {
     }
 
     public Jws<Claims> getClaims(String authToken){
+        String token = authToken.replace(TOKEN_PREFIX, "");
         return Jwts.parser()
                 .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(authToken);
+                .parseClaimsJws(token);
     }
 
     public UsernamePasswordAuthenticationToken getAuthentication(String authHeader) {
-        String token = authHeader.replace(TOKEN_PREFIX, "");
-        String username = getClaims(token).getBody().getSubject();
+        String username = getClaims(authHeader).getBody().getSubject();
         UserDetails user = userDetailsService.loadUserByUsername(username);
         return new UsernamePasswordAuthenticationToken(user.getUsername(), null, user.getAuthorities());
     }

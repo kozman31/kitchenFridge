@@ -86,7 +86,6 @@ public class LoginAttemptService {
     }
 
     private LoginAttempt firstLogin(User user){
-        LoginAttempt firstLogin = new LoginAttempt(user);
-        return firstLogin;
+        return new LoginAttempt(user);
     }
 }

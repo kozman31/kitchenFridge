@@ -3,8 +3,8 @@ package com.thekitchenfridge.audit;
 public enum Action {
     INSERT("INSERT"), UPDATE("UPDATE"), DELETE("DELETE");
 
-    private String value;
-    private Action(String value){
+    private final String value;
+    Action(String value){
         this.value = value;
     }
 

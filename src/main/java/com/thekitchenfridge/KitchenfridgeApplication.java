@@ -1,17 +1,8 @@
 package com.thekitchenfridge;
 
-import com.thekitchenfridge.security.entities.Authority;
-import com.thekitchenfridge.security.entities.Role;
-import com.thekitchenfridge.users.entity.UserProfileDto;
-import com.thekitchenfridge.users.service.UserDetailsServiceImpl;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @SpringBootApplication
 @EnableConfigurationProperties

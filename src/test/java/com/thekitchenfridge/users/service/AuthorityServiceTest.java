@@ -52,9 +52,9 @@ public class AuthorityServiceTest {
 
     List<Authority> rtrnLst = new ArrayList<>();
 
-    Set<Authority> authoritySetAll = new HashSet();
-    Set<Authority> authoritySetAdmin = new HashSet();
-    Set<Authority> authoritySetUser = new HashSet();
+    Set<Authority> authoritySetAll = new HashSet<>();
+    Set<Authority> authoritySetAdmin = new HashSet<>();
+    Set<Authority> authoritySetUser = new HashSet<>();
 
     @Before
     public void setUp() throws Exception {

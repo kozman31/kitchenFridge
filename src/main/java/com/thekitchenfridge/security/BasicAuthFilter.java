@@ -2,7 +2,7 @@ package com.thekitchenfridge.security;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thekitchenfridge.users.entity.UserProfileDto;
+import com.thekitchenfridge.dto.UserProfileDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 
 @Slf4j
 public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
@@ -49,7 +50,6 @@ public class BasicAuthFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse rsp, FilterChain filterChain, Authentication auth) throws IOException, ServletException {
         String token = jwt.buildToken(auth);
         rsp.addHeader("Authorization", token);
-
         filterChain.doFilter(req,rsp);
     }
 

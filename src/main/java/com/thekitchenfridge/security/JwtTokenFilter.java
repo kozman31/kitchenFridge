@@ -15,12 +15,10 @@ import java.io.IOException;
 
 public class JwtTokenFilter extends BasicAuthenticationFilter {
 
-    private UserDetailsServiceImpl userDetailsService;
     private JwtUtility jwt;
 
-    public JwtTokenFilter(AuthenticationManager authManager, UserDetailsServiceImpl userDetailsService, JwtUtility jwt){
+    public JwtTokenFilter(AuthenticationManager authManager, JwtUtility jwt){
         super(authManager);
-        this.userDetailsService = userDetailsService;
         this.jwt = jwt;
     }
 

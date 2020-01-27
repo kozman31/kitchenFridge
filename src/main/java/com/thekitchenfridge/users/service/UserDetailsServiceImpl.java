@@ -3,11 +3,13 @@ package com.thekitchenfridge.users.service;
 import com.thekitchenfridge.email.EmailService;
 import com.thekitchenfridge.exceptions.UserExistsException;
 import com.thekitchenfridge.security.entities.Role;
+import com.thekitchenfridge.dto.BasicUserDto;
 import com.thekitchenfridge.users.entity.User;
-import com.thekitchenfridge.users.entity.UserProfileDto;
+import com.thekitchenfridge.dto.UserProfileDto;
 import com.thekitchenfridge.users.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @PostConstruct
     private void postConstruct() throws RoleNotFoundException {
-        UserProfileDto admin = new UserProfileDto("Admin", "secretPw", 1L);
+        UserProfileDto admin = new UserProfileDto("Admin", "secretPw", 1L, null);
         adminCreateNewUser(admin);
     }
 
@@ -40,6 +42,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userRepository.findByUsername(username).orElseThrow(
                 ()-> new UsernameNotFoundException("User "+ username + " not found")
         );
+    }
+
+    public BasicUserDto getUserProfileByUsername(String username){
+        User user = userRepository.getProfileByUsername(username);
+        ModelMapper modelMapper = new ModelMapper();
+        BasicUserDto basicUserDto = modelMapper.map(user, BasicUserDto.class);
+        return basicUserDto;
     }
 
     public void updateAuthorities(UserProfileDto userProfileDto) throws RoleNotFoundException{
@@ -75,15 +84,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     .username(userProfileDto.getUsername())
                     .password(userProfileDto.getPassword())
                     .role(role)
+                    .firstName(userProfileDto.getFirstName())
+                    .lastName(userProfileDto.getLastName())
+                    .email(userProfileDto.getEmail())
+                    .isEnabled(true)
                     .build();
 
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-            user.setFirstName(userProfileDto.getFirstName());
-            user.setLastName(userProfileDto.getLastName());
-            user.setEmail(userProfileDto.getEmail());
             userRepository.save(user);
-
             return true;
         }
         return false;

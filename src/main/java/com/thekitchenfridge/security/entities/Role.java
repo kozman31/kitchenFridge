@@ -30,6 +30,9 @@ public class Role extends Auditor<String> implements GrantedAuthority {
     @UniqueElements
     private String roleName;
 
+    @Column(name = "DEFAULT_ROLE")
+    private Boolean defaultRole;
+
     @ManyToMany(fetch=FetchType.EAGER)
     @Builder.Default
     private Set<Authority> authorities = new HashSet<>();

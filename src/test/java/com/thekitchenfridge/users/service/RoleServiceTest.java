@@ -19,7 +19,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.management.relation.RoleNotFoundException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -61,9 +60,9 @@ public class RoleServiceTest {
     List<Authority> authorityListAdmin2;
     List<Authority> authorityListUser1;
 
-    Set<Authority> authoritySetAdmin1 = new HashSet();
-    Set<Authority> authoritySetAdmin2 = new HashSet();
-    Set<Authority> authoritySetUser = new HashSet();
+    Set<Authority> authoritySetAdmin1 = new HashSet<>();
+    Set<Authority> authoritySetAdmin2 = new HashSet<>();
+    Set<Authority> authoritySetUser = new HashSet<>();
 
     @Autowired
     RoleRepository roleRepository;

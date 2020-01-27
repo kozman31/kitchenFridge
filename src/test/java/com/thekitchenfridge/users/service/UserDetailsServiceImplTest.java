@@ -2,7 +2,7 @@ package com.thekitchenfridge.users.service;
 
 import com.thekitchenfridge.security.entities.Role;
 import com.thekitchenfridge.users.entity.User;
-import com.thekitchenfridge.users.entity.UserProfileDto;
+import com.thekitchenfridge.dto.UserProfileDto;
 import com.thekitchenfridge.users.repository.RoleRepository;
 import com.thekitchenfridge.users.repository.UserRepository;
 import org.junit.Before;

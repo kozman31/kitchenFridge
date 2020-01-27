@@ -1,8 +1,6 @@
-package com.thekitchenfridge.users.entity;
+package com.thekitchenfridge.dto;
 
-import com.thekitchenfridge.audit.Auditor;
 import com.thekitchenfridge.security.entities.Authority;
-import com.thekitchenfridge.security.entities.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,19 +13,19 @@ import java.util.Set;
 @AllArgsConstructor()
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class UserProfileDto extends Auditor<String> implements Serializable {
+public class UserProfileDto extends BasicUserDto implements Serializable {
 
-    private String username;
     private String password;
     private Long roleId;
     private Set<Authority> authorities;
-    private String firstName;
-    private String lastName;
-    private String email;
 
-    public UserProfileDto(String username, String password, Long roleId) {
-        this.username = username;
+    public UserProfileDto(String username, String password, Long roleId, String email, String firstName, String lastName) {
+        super(username, email, firstName, lastName);
         this.password = password;
         this.roleId = roleId;
+    }
+
+    public UserProfileDto(String username, String password, Long roleId, String email){
+        this(username, password, roleId, email, null, null);
     }
 }

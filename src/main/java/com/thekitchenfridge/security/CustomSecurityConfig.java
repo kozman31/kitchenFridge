@@ -44,14 +44,14 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
             .authorizeRequests()
-            .antMatchers( "/auth","/roles","/h2-console/**","/user/*").permitAll()
-            .antMatchers("/admin/register","/login", "/act/*").permitAll()
+//              .antMatchers( "/auth","/roles","/h2-console/**").permitAll()
+            .antMatchers("/register","/login", "/user/*").permitAll()
             .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("admin, user")
+            .antMatchers("/user/**").hasAnyRole("admin, user")
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(new BasicAuthFilter(authenticationManagerBean(), jwt),UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(new JwtTokenFilter(authenticationManagerBean(), userDetailsService, jwt), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(new JwtTokenFilter(authenticationManagerBean(), jwt), UsernamePasswordAuthenticationFilter.class);
 
 
         http.exceptionHandling()
