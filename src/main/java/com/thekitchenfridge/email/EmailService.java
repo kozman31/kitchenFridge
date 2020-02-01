@@ -27,7 +27,7 @@ public class EmailService {
         MimeMessage mimeMail = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMsgHlp = new MimeMessageHelper(mimeMail);
         try {
-            mimeMsgHlp.addTo(email.getSender());
+            mimeMsgHlp.setFrom(email.getSender());
             mimeMsgHlp.setTo(email.getRecipient());
             mimeMsgHlp.setSubject(email.getMessageSubject());
             mimeMsgHlp.setText(email.getMessageBody(), isHtml);
@@ -40,6 +40,7 @@ public class EmailService {
     public void activationEmail(User user, final String tokenId){
         Email confirmationEmail = Email.builder()
                 .recipient(user.getEmail())
+                .messageSubject("Welcome To The Kitchen Fridge")
                 .sender(senderEmail)
                 .build().addActivationMsg(tokenId);
         sendMail(confirmationEmail, true);

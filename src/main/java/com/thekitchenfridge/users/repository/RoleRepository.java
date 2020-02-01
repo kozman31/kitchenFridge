@@ -13,6 +13,6 @@ public interface RoleRepository extends  JpaRepository <Role, Long> {
 
     Optional<Role> findRoleByRoleId(Long roleId);
 
-    @Query(value = "SELECT * from Roles where default = true", nativeQuery = true)
+    @Query(value = "SELECT * from roles where default_role = true", nativeQuery = true)
     Role getDefaultRole();
 }

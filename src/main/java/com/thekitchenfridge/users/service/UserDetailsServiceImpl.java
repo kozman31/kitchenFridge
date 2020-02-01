@@ -1,7 +1,7 @@
 package com.thekitchenfridge.users.service;
 
-import com.thekitchenfridge.email.EmailService;
 import com.thekitchenfridge.exceptions.UserExistsException;
+import com.thekitchenfridge.security.activation.ActivationService;
 import com.thekitchenfridge.security.entities.Role;
 import com.thekitchenfridge.dto.BasicUserDto;
 import com.thekitchenfridge.users.entity.User;
@@ -19,14 +19,16 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import javax.management.relation.RoleNotFoundException;
 
+import static com.thekitchenfridge.security.activation.ActivationService.Activation.*;
+
 @Service
 @Slf4j
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private RoleService roleService;
-    private EmailService emailService;
     private UserRepository userRepository;
+    private ActivationService activationService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -59,10 +61,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
     public boolean registerNewUser(UserProfileDto userProfileDto) throws UserExistsException {
         if (!userExists(userProfileDto.getUsername())) {
+            Role defaultRole =roleService.getDefaultRole();
             User user = User.builder()
                     .username(userProfileDto.getUsername())
                     .password(userProfileDto.getPassword())
-                    .role(roleService.getDefaultRole())
+                    .role(defaultRole)
                     .build();
 
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -71,7 +74,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             user.setLastName(userProfileDto.getLastName());
             user.setEmail(userProfileDto.getEmail());
             userRepository.save(user);
-
+            activationService.userActivationEventTrigger(user, NEW_USER);
             return true;
         }
         return false;
@@ -80,6 +83,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public boolean adminCreateNewUser(UserProfileDto userProfileDto) throws UserExistsException, RoleNotFoundException {
         if (!userExists(userProfileDto.getUsername())) {
             Role role = roleService.findRolesByRoleId(userProfileDto.getRoleId());
+            roleService.saveRole(role);
             User user = User.builder()
                     .username(userProfileDto.getUsername())
                     .password(userProfileDto.getPassword())
@@ -104,4 +108,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public void updateUserDetails(User user){
         userRepository.save(user);
     }
+
+
 }

@@ -1,7 +1,10 @@
 package com.thekitchenfridge.users.controller;
 
 import com.thekitchenfridge.dto.BasicUserDto;
+import com.thekitchenfridge.email.EmailService;
+import com.thekitchenfridge.exceptions.BadActTokenException;
 import com.thekitchenfridge.security.JwtUtility;
+import com.thekitchenfridge.security.activation.ActivationService;
 import com.thekitchenfridge.users.entity.User;
 import com.thekitchenfridge.dto.UserProfileDto;
 import com.thekitchenfridge.users.service.UserDetailsServiceImpl;
@@ -22,6 +25,9 @@ public class UserController {
 
     @Autowired
     UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    ActivationService activationService;
 
     @Autowired JwtUtility jwtUtility;
 
@@ -49,9 +55,10 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping(value="/user/activate")
-    public ResponseEntity activateUser(@RequestParam("token") String token){
+    @GetMapping(value="/activate")
+    public ResponseEntity activateUser(@RequestParam("t") String token) throws BadActTokenException {
         System.out.println(token);
+        activationService.activateUser(token);
         return new ResponseEntity<>( HttpStatus.OK);
     }
 

@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,11 +24,13 @@ public class Role extends Auditor<String> implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @EqualsAndHashCode.Exclude
+    private Long id;
+
     @Column(name = "ROLE_ID")
     private Long roleId;
 
-    @Column(name = "ROLE_NAME")
-    @UniqueElements
+    @Column(name = "ROLE_NAME",unique=true)
+    @NotBlank
     private String roleName;
 
     @Column(name = "DEFAULT_ROLE")

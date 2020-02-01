@@ -2,6 +2,7 @@ package com.thekitchenfridge.security.entities;
 
 import com.thekitchenfridge.users.entity.User;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,6 +11,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class ActivationToken {
 
     private static final int EXPIRY_IN_MIN = 60*24;
@@ -40,7 +42,8 @@ public class ActivationToken {
         return new Date(cal.getTime().getTime());
     }
 
-    public void activateUser() {
+    public User activateUser() {
         user.activate();
+        return user;
     }
 }

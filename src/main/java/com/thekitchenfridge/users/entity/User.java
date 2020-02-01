@@ -5,6 +5,7 @@ import com.thekitchenfridge.audit.UserHistoryListener;
 import com.thekitchenfridge.security.entities.LoginAttempt;
 import com.thekitchenfridge.security.entities.Role;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -29,6 +30,7 @@ public class User extends Auditor<String> implements UserDetails {
     private Long id;
 
     @NotNull
+    @Column(unique=true)
     private String username;
 
     @ToString.Exclude
@@ -48,6 +50,8 @@ public class User extends Auditor<String> implements UserDetails {
     private String firstName;
     private String lastName;
     private String location;
+
+    @Column(unique=true)
     private String email;
 
     @OneToOne

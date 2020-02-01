@@ -30,8 +30,10 @@ public class RoleService {
     }
 
     public Role findRolesByRoleId(Long roleId) throws RoleNotFoundException {
-
-        return roleRepository.findRoleByRoleId(roleId).orElseThrow(RoleNotFoundException::new);
+        Role role = roleRepository.findRoleByRoleId(roleId).orElseThrow(RoleNotFoundException::new);
+        Set<Authority> authorities = authorityService.generateAuthoritySet(role.getAuthorities());
+        role.setAuthorities(authorities);
+        return role;
     }
     public Optional<Role> findRoleByName(String roleName){
         return roleRepository.findRoleByRoleName(roleName);
@@ -41,7 +43,10 @@ public class RoleService {
     }
 
     public Role getDefaultRole(){
-        return roleRepository.getDefaultRole();
+        Role role = roleRepository.getDefaultRole();
+        Set<Authority> authorities = authorityService.generateAuthoritySet(role.getAuthorities());
+        role.setAuthorities(authorities);
+        return role;
     }
 }
 /*

@@ -19,10 +19,12 @@ public class Authority extends Auditor<String> implements GrantedAuthority {
     @Id
     @EqualsAndHashCode.Exclude
     @GeneratedValue(strategy = IDENTITY)
+    private Long id;
+
     @Column(name="AUTHORITY_ID")
     private Long authorityId;
 
-    @Column(name="AUTHORITY_NAME")
+    @Column(name="AUTHORITY_NAME",unique=true)
     private String name;
 
     @Override
