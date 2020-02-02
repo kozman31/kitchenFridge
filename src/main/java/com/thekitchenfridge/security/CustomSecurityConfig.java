@@ -71,7 +71,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://localhost:3000"));
+        configuration.setAllowedOrigins(Arrays.asList("https://localhost:3000", "https://ekoz.dev"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setExposedHeaders(Arrays.asList("Authorization"));
