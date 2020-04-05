@@ -2,6 +2,7 @@ package com.thekitchenfridge.users.entity;
 
 import com.thekitchenfridge.audit.Auditor;
 import com.thekitchenfridge.audit.UserHistoryListener;
+import com.thekitchenfridge.recipes.entities.Recipe;
 import com.thekitchenfridge.security.entities.LoginAttempt;
 import com.thekitchenfridge.security.entities.Role;
 import lombok.*;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name="USERS")
@@ -50,6 +52,10 @@ public class User extends Auditor<String> implements UserDetails {
     private String firstName;
     private String lastName;
     private String location;
+
+    @OneToMany
+    @JoinColumn(name="fk_user_id")
+    private List<Recipe> recipeList;
 
     @Column(unique=true)
     private String email;

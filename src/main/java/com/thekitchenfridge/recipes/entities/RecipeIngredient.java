@@ -1,22 +1,15 @@
 package com.thekitchenfridge.recipes.entities;
 
 import com.thekitchenfridge.audit.Auditor;
-import com.thekitchenfridge.recipes.MeasurementUnit;
 
 import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 @Embeddable
 public class RecipeIngredient extends Auditor<String> {
 
     private String name;
-    private Double amount;
+    private String quantity;
     private Long idx;
-
-    @Enumerated(EnumType.STRING)
-    private MeasurementUnit mUnit;
-
 
     public String getName() {
         return name;
@@ -26,20 +19,12 @@ public class RecipeIngredient extends Auditor<String> {
         this.name = name;
     }
 
-    public Double getAmount() {
-        return amount;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public MeasurementUnit getmUnit() {
-        return mUnit;
-    }
-
-    public void setmUnit(MeasurementUnit MUnit) {
-        this.mUnit = MUnit;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public Long getIdx() {
